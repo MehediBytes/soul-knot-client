@@ -49,7 +49,7 @@ const Login = () => {
                     >
                         Login
                     </button>
-                    <p className="text-center my-5">OR</p>
+                    <p className="text-center my-5 font-semibold">OR</p>
                     <SocialLogin></SocialLogin>
                     <p className="text-sm mt-6 text-center">
                         Do not have an account?{" "}
