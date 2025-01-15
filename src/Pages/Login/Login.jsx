@@ -13,23 +13,20 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
     const onSubmit = (data) => {
-        try {
-            signIn(data.email, data.password)
-                .then(result => {
-                    const user = result.user;
-                    console.log(user);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Loged in successfully.',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    navigate(from, { replace: true });
-                })
-        } catch (error) {
-            alert(error.message);
-        }
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                user & Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Loged in successfully.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate(from, { replace: true });
+            })
+
     };
 
     return (

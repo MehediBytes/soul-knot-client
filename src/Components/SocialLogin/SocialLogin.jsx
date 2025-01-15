@@ -1,29 +1,40 @@
 import { FaGoogle } from "react-icons/fa6";
 import useAuth from "../../Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/UseAxiosPublic";
 
 const SocialLogin = () => {
 
     const { googleSignIn, setUser } = useAuth();
-    const from = location.state?.from?.pathname || "/";
+    const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
-                console.log(result.user);
                 setUser(result.user);
-                if (result.user?.email) {
+                if (result.user.email) {
                     Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "You are loged in successfully!",
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Loged in with google successfully.',
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    navigate(from, { replace: true });
                 }
+                navigate(from, { replace: true });
+                const userInfo = {
+                    name: result.user?.displayName,
+                    email: result.user?.email,
+                    photo: result.user?.photoURL,
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                    })
             })
     }
 
