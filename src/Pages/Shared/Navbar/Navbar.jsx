@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { FaBarsStaggered, FaUser } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
 
 const Navbar = () => {
+
+    const { user } = useAuth();
+
     // State for toggling mobile menu
     const [isOpen, setIsOpen] = useState(false);
 
@@ -10,10 +14,14 @@ const Navbar = () => {
 
     const navOptions = <>
         <Link to={"/"} className={`p-1 ${location.pathname === '/' ? 'border-b-2 rounded-lg border-white' : ''}`}>Home</Link>
+
         <Link to={"/biodata"} className={`p-1 ${location.pathname === '/biodata' ? 'border-b-2 rounded-lg border-white' : ''}`}>Biodatas</Link>
+
         <Link to={"/about"} className={`p-1 ${location.pathname === '/about' ? 'border-b-2 rounded-lg border-white' : ''}`}>About Us</Link>
+
         <Link to={"/contact"} className={`p-1 ${location.pathname === '/contact' ? 'border-b-2 rounded-lg border-white' : ''}`}>Contact Us</Link>
-        <Link to={"/dashboard"} className={`p-1 ${location.pathname === '/dashboard' ? 'border-b-2 rounded-lg border-white' : ''}`}>Dashboard</Link>
+
+        {user?.email && <Link to={"/dashboard"} className={`p-1 ${location.pathname === '/dashboard' ? 'border-b-2 rounded-lg border-white' : ''}`}>Dashboard</Link>}
     </>
 
     return (
@@ -35,19 +43,23 @@ const Navbar = () => {
                 <div className="hidden lg:flex space-x-5">
                     {navOptions}
                 </div>
-                {/* {user ?
+                {user && user?.email ?
                     <div className='flex items-center gap-2'>
-                        <div className='border rounded-full p-2'>
-                            <img src={user?.PhotoUrl} alt="" />
+                        <div className='border rounded-full'>
+                            <img className="w-8 h-8 rounded-full cursor-pointer"
+                                referrerPolicy="no-referrer"
+                                src={user?.photoURL || "None"}
+                                alt={user?.displayName || "User"}
+                                title={user?.displayName || "User"} />
                         </div>
                         <button className='border rounded-lg px-2 py-1 hover:bg-pink-700'>Log out</button>
                     </div>
-                    : */}
+                    :
                     <div className='flex items-center gap-2'>
                         <p className='border rounded-full p-2 cursor-pointer'><FaUser></FaUser></p>
                         <button className='border rounded-lg px-2 py-1 hover:bg-pink-700'><Link to={"/login"}>Log In</Link></button>
                     </div>
-                
+                }
             </nav>
 
             {/* Mobile Menu */}
