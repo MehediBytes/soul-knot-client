@@ -1,5 +1,6 @@
 import Banner from "../Banner/Banner";
 import HowItWorks from "../HowItWorks/HowItWorks";
+import SuccessStories from "../SuccessStories/SuccessStories";
 
 
 const Home = () => {
@@ -13,6 +14,12 @@ const Home = () => {
             </div>
             <div>
                 <HowItWorks></HowItWorks>
+            </div>
+            <div>
+                <h3>success counter section is here...</h3>
+            </div>
+            <div>
+                <SuccessStories></SuccessStories>
             </div>
         </div>
     );
