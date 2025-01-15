@@ -1,6 +1,7 @@
 import { FaGoogle } from "react-icons/fa6";
 import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
 
@@ -8,13 +9,22 @@ const SocialLogin = () => {
     const from = location.state?.from?.pathname || "/";
     const navigate = useNavigate();
 
-    const handleGoogleSignIn = () =>{
+    const handleGoogleSignIn = () => {
         googleSignIn()
-        .then(result =>{
-            console.log(result.user);
-            setUser(result.user)
-            navigate(from, { replace: true });
-        })
+            .then(result => {
+                console.log(result.user);
+                setUser(result.user);
+                if (result.user?.email) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "You are loged in successfuly!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate(from, { replace: true });
+                }
+            })
     }
 
     return (

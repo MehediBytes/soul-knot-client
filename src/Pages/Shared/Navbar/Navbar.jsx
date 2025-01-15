@@ -2,15 +2,39 @@ import { useState } from 'react';
 import { FaBarsStaggered, FaUser } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
 
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
 
     // State for toggling mobile menu
     const [isOpen, setIsOpen] = useState(false);
 
     const location = useLocation();
+
+    // Handle Logout
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "You are now loged out",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Problem in log out.", error,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+    };
 
     const navOptions = <>
         <Link to={"/"} className={`p-1 ${location.pathname === '/' ? 'border-b-2 rounded-lg border-white' : ''}`}>Home</Link>
@@ -52,7 +76,8 @@ const Navbar = () => {
                                 alt={user?.displayName || "User"}
                                 title={user?.displayName || "User"} />
                         </div>
-                        <button className='border rounded-lg px-2 py-1 hover:bg-pink-700'>Log out</button>
+                        <button onClick={handleLogout}
+                        className='border rounded-lg px-2 py-1 hover:bg-pink-700'>Log out</button>
                     </div>
                     :
                     <div className='flex items-center gap-2'>
