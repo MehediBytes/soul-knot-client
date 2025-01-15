@@ -10,7 +10,7 @@ import AuthProvider from './Providers/AuthProvider';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <div className='bg-gradient-to-r from-purple-50 to-pink-50'>
+      <div className='bg-pink-100'>
         <RouterProvider router={router}></RouterProvider>
       </div>
     </AuthProvider>

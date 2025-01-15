@@ -49,7 +49,7 @@ const Navbar = () => {
     </>
 
     return (
-        <header className="bg-gradient-to-r from-purple-500 to-pink-500 text-white fixed w-full z-10 top-0 left-0">
+        <header className="bg-pink-500 text-white fixed w-full z-10 top-0 left-0">
             <nav className="max-w-7xl mx-auto p-3 flex justify-between items-center">
                 {/* Logo and Website Name */}
                 <div className="flex items-center space-x-2">
