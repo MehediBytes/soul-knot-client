@@ -1,9 +1,12 @@
+import Banner from "../Banner/Banner";
 
 
 const Home = () => {
     return (
-        <div className="max-w-6xl mx-auto px-4">
-            <h3>Homepage...</h3>
+        <div className="container mx-auto">
+            <div className="-mt-5">
+                <Banner></Banner>
+            </div>
         </div>
     );
 };
