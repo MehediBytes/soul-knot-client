@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaBarsStaggered } from 'react-icons/fa6';
+import { FaBarsStaggered, FaUser } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -35,10 +35,19 @@ const Navbar = () => {
                 <div className="hidden lg:flex space-x-5">
                     {navOptions}
                 </div>
-
-                <div>
-                <Link to={"/login"} className={`p-1 ${location.pathname === '/login' ? 'border-b-2 rounded-lg border-white' : ''}`}>Login</Link>
-                </div>
+                {/* {user ?
+                    <div className='flex items-center gap-2'>
+                        <div className='border rounded-full p-2'>
+                            <img src={user?.PhotoUrl} alt="" />
+                        </div>
+                        <button className='border rounded-lg px-2 py-1 hover:bg-pink-700'>Log out</button>
+                    </div>
+                    : */}
+                    <div className='flex items-center gap-2'>
+                        <p className='border rounded-full p-2 cursor-pointer'><FaUser></FaUser></p>
+                        <button className='border rounded-lg px-2 py-1 hover:bg-pink-700'><Link to={"/login"}>Log In</Link></button>
+                    </div>
+                
             </nav>
 
             {/* Mobile Menu */}
