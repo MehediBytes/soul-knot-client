@@ -72,7 +72,7 @@ const Navbar = () => {
                         <div className='border rounded-full'>
                             <img className="w-8 h-8 rounded-full cursor-pointer"
                                 referrerPolicy="no-referrer"
-                                src={user?.photoURL || "None"}
+                                src={user?.photoURL || user?.photo || "None"}
                                 alt={user?.displayName || "User"}
                                 title={user?.displayName || "User"} />
                         </div>

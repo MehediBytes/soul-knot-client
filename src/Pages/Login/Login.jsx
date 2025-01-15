@@ -1,14 +1,32 @@
 import { useForm } from "react-hook-form";
 import loginAnime from '../../assets/login-anime.png';
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+    const { signIn } = useAuth();
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
-    const onSubmit = async () => {
+    const onSubmit = (data) => {
         try {
-            // 
+            signIn(data.email, data.password)
+                .then(result => {
+                    const user = result.user;
+                    console.log(user);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Loged in successfully.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate(from, { replace: true });
+                })
         } catch (error) {
             alert(error.message);
         }

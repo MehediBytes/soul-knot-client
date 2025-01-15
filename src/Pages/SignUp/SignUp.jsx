@@ -1,18 +1,34 @@
 import { useForm } from 'react-hook-form';
 import signUpAnime from '../../assets/signUp-anime.png'
 import SocialLogin from '../../Components/SocialLogin/SocialLogin';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-
+    const { createUser, updateUserProfile, setUser } = useAuth();
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = async () => {
-        try {
-            // todo
-        } catch (error) {
-            alert(error.message);
-        }
+    const onSubmit = (data) => {
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                setUser(loggedUser);
+                updateUserProfile(data?.name, data?.photoURL)
+                    .then(() => {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'User created successfully.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        navigate('/');
+                    })
+                    .catch(error => console.log(error))
+            })
     };
 
     return (
@@ -39,10 +55,10 @@ const SignUp = () => {
                         <label className="block mb-1">Photo URL</label>
                         <input
                             type="text"
-                            {...register("photo", { required: "Photo URL is required" })}
+                            {...register("photoURL", { required: "Photo URL is required" })}
                             className="w-full px-4 py-2 border rounded-md"
                         />
-                        {errors.photo && <p className="text-red-500 text-sm">{errors.photo.message}</p>}
+                        {errors.photoURL && <p className="text-red-500 text-sm">{errors.photoURL.message}</p>}
                     </div>
                     <div className="mb-4">
                         <label className="block mb-1">Email</label>
