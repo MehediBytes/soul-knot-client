@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UseBiodata from "../../../Hooks/UseBiodata";
+import UseBiodata from "../../../../Hooks/UseBiodata";
 
 const PremiumProfiles = () => {
     const [biodata, loading] = UseBiodata();
@@ -71,7 +71,7 @@ const PremiumProfiles = () => {
                     </div>
                 ))}
             </div>
-            <div className="flex justify-center items-center"><button className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700">View More Profiles</button></div>
+            {/* <div className="flex justify-center items-center"><button className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700">View More Profiles</button></div> */}
         </div>
     );
 };

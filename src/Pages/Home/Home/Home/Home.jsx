@@ -1,7 +1,8 @@
-import PremiumProfiles from "../../PremiumProfiles/PremiumProfiles";
+import PremiumProfiles from "../PremiumProfiles/PremiumProfiles";
 import Banner from "../Banner/Banner";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import SuccessStories from "../SuccessStories/SuccessStories";
+import SuccessCounter from "../SuccessCounter/SuccessCounter ";
 
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
                 <HowItWorks></HowItWorks>
             </div>
             <div>
-                <h3>success counter section is here...</h3>
+                <SuccessCounter></SuccessCounter>
             </div>
             <div>
                 <SuccessStories></SuccessStories>
