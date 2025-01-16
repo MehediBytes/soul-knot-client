@@ -1,3 +1,4 @@
+import PremiumProfiles from "../../PremiumProfiles/PremiumProfiles";
 import Banner from "../Banner/Banner";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import SuccessStories from "../SuccessStories/SuccessStories";
@@ -10,7 +11,7 @@ const Home = () => {
                 <Banner></Banner>
             </div>
             <div>
-                <h3>premium customer section</h3>
+                <PremiumProfiles></PremiumProfiles>
             </div>
             <div>
                 <HowItWorks></HowItWorks>

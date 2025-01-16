@@ -8,7 +8,7 @@ const SuccessStories = () => {
     const stories = [
         {
             id: 1,
-            coupleImage: "https://i.ibb.co.com/5Y6pknm/Khan-2492.jpg", // Replace with actual image URLs
+            coupleImage: "https://i.ibb.co.com/5Y6pknm/Khan-2492.jpg",
             marriageDate: "2023-12-15",
             reviewStar: 4.5,
             storyText: "Soul-Knot helped us find each other, and it's been the happiest journey ever!",
@@ -50,7 +50,6 @@ const SuccessStories = () => {
         },
     ];
 
-    // Settings for the slick carousel
     const settings = {
 
         dots: true,
@@ -59,7 +58,7 @@ const SuccessStories = () => {
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 2000,
         responsive: [
             {
                 breakpoint: 1024,
@@ -101,13 +100,10 @@ const SuccessStories = () => {
                                         className="w-40 mx-auto h-40 object-cover rounded-full"
                                     />
                                 </div>
-
-                                {/* Marriage Date */}
                                 <p className="text-gray-500 text-sm mb-2">
                                     Married on: {new Date(story.marriageDate).toLocaleDateString()}
                                 </p>
 
-                                {/* Review Star */}
                                 <div className="flex justify-center items-center mb-4">
                                     {Array.from({ length: 5 }, (_, index) => {
                                         const starValue = index + 1;
@@ -126,7 +122,6 @@ const SuccessStories = () => {
                                     })}
                                 </div>
 
-                                {/* Success Story Text */}
                                 <p className="text-gray-700 mb-4">{story.storyText}</p>
                             </div>
                         ))}

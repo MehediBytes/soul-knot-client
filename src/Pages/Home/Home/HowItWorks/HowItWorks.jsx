@@ -36,7 +36,7 @@ const HowItWorks = () => {
                     Discover your soulmate with Soul-Knot in just four simple steps.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {steps.map((step) => (
                         <div
                             key={step.id}

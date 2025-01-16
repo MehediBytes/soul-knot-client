@@ -1,5 +1,4 @@
 
-
 const Biodata = () => {
     return (
         <div>
