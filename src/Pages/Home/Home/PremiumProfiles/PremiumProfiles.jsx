@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UseBiodata from "../../../../Hooks/UseBiodata";
+import BiodataCard from "../../../Shared/BiodataCard/BiodataCard";
 
 const PremiumProfiles = () => {
     const [biodata, loading] = UseBiodata();
@@ -22,7 +23,7 @@ const PremiumProfiles = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto my-5 px-4">
+        <div className="max-w-7xl mx-auto my-10 px-4">
             <div className="text-center">
                 <h3 className="text-3xl font-bold text-pink-500">Our Premium Members</h3>
             </div>
@@ -41,34 +42,7 @@ const PremiumProfiles = () => {
             {/* Profile Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                 {sortedPremium.map((profile) => (
-                    <div
-                        key={profile._id}
-                        className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col flex-grow justify-between"
-                    >
-                        <img
-                            src={profile.profileImageLink}
-                            alt={profile.name}
-                            className="w-40 h-40 rounded-full mx-auto mt-2 object-cover"
-                        />
-                        <div className="p-4">
-                            <div className="space-y-1">
-                                <h2 className="text-xl font-bold">{profile.name}</h2>
-                                <p className="text-gray-600">
-                                    Type: {profile.biodataType}
-                                </p>
-                                <p>Permanent Division: {profile.permanentDivisionName}</p>
-                                <p>Age: {profile.age}</p>
-                                <p>Occupation: {profile.occupation}</p>
-                            </div>
-                            <div>
-                                <button
-                                    className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700"
-                                >
-                                    View Profile
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <BiodataCard key={profile._id} profile={profile}></BiodataCard>
                 ))}
             </div>
             {/* <div className="flex justify-center items-center"><button className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700">View More Profiles</button></div> */}

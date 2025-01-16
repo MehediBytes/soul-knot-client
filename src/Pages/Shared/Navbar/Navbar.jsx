@@ -50,7 +50,7 @@ const Navbar = () => {
 
     return (
         <header className="bg-pink-500 text-white fixed w-full z-10 top-0 left-0">
-            <nav className="max-w-7xl mx-auto p-3 flex justify-between items-center">
+            <nav className="container mx-auto py-3 px-4 flex justify-between items-center">
                 {/* Logo and Website Name */}
                 <div className="flex items-center space-x-2">
                     {/* Mobile Menu Button */}

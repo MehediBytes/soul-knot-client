@@ -1,7 +1,9 @@
 import UseBiodata from "../../../../Hooks/UseBiodata";
+import UseStory from "../../../../Hooks/UseStory";
 
 const SuccessCounter = () => {
     const [biodata, loading] = UseBiodata();
+    const [stories] = UseStory();
 
     // Calculate counts
     const totalBiodata = biodata.length;
@@ -9,7 +11,7 @@ const SuccessCounter = () => {
     const girlsCount = biodata.filter((data) => data.biodataType === "Female").length;
 
     // todo: Will replace dynamic value from server
-    const marriagesCompleted = 25;
+    const marriagesCompleted = stories.length;
 
     if (loading) {
         return (
@@ -20,7 +22,7 @@ const SuccessCounter = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto my-5 px-4">
+        <div className="max-w-7xl mx-auto my-10 px-4">
             <h2 className="text-3xl font-bold text-center mb-5 text-pink-500">Success Counter</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Total Biodata */}

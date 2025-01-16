@@ -2,53 +2,22 @@ import Slider from "react-slick";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
+import UseStory from "../../../../Hooks/UseStory";
+// import useAxiosPublic from "../../../../Hooks/UseAxiosPublic";
+// import { useQuery } from "@tanstack/react-query";
 
 
 const SuccessStories = () => {
-    const stories = [
-        {
-            id: 1,
-            coupleImage: "https://i.ibb.co.com/5Y6pknm/Khan-2492.jpg",
-            marriageDate: "2023-12-15",
-            reviewStar: 4.5,
-            storyText: "Soul-Knot helped us find each other, and it's been the happiest journey ever!",
-        },
-        {
-            id: 2,
-            coupleImage: "https://i.ibb.co.com/4N3Ljmw/speaker-1.jpg",
-            marriageDate: "2023-11-20",
-            reviewStar: 5,
-            storyText: "Thank you, Soul-Knot, for making our dreams come true!",
-        },
-        {
-            id: 3,
-            coupleImage: "https://i.ibb.co.com/1rqhjJS/tutor-8-3.jpg",
-            marriageDate: "2023-10-05",
-            reviewStar: 4,
-            storyText: "We are so grateful for this platform. It was truly a life-changer for us.",
-        },
-        {
-            id: 4,
-            coupleImage: "https://i.ibb.co.com/0CtdrXx/rs.jpg",
-            marriageDate: "2023-09-18",
-            reviewStar: 5,
-            storyText: "Our soulmate journey started with Soul-Knot, and we couldn't be happier!",
-        },
-        {
-            id: 5,
-            coupleImage: "https://i.ibb.co.com/3BHNB7g/jofra.jpg",
-            marriageDate: "2023-08-12",
-            reviewStar: 4.5,
-            storyText: "We met our life partners thanks to Soul-Knot! Grateful for the connections!",
-        },
-        {
-            id: 6,
-            coupleImage: "https://i.ibb.co.com/gm9bZ0K/Kane-Williamson-1024x768.webp",
-            marriageDate: "2023-07-30",
-            reviewStar: 5,
-            storyText: "We never thought we would find our perfect match, but Soul-Knot made it possible!",
-        },
-    ];
+
+    const [stories, loading] = UseStory();
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
+            </div>
+        );
+    }
 
     const settings = {
 
@@ -76,7 +45,7 @@ const SuccessStories = () => {
     };
 
     return (
-        <section className="max-w-7xl mx-auto px-8 mt-5 mb-10">
+        <section className="max-w-7xl mx-auto px-8 my-10">
             <div className="text-center">
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">
                     Success Stories
