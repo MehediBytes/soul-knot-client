@@ -1,9 +1,10 @@
 import { FaRegAddressCard } from "react-icons/fa";
 import { IoMaleFemale } from "react-icons/io5";
 import { MdWorkOutline } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
-const BiodataCard = ({profile}) => {
+const BiodataCard = ({ profile }) => {
     return (
         <div
             key={profile._id}
@@ -25,10 +26,10 @@ const BiodataCard = ({profile}) => {
                     <p className=""><strong>Age:</strong> {profile.age}</p>
                 </div>
                 <div>
-                    <button
-                        className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700"
-                    >
-                        View Profile
+                    <button className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700">
+                        <Link to={`/profileDetails/${profile._id}`}>
+                            View Profile
+                        </Link>
                     </button>
                 </div>
             </div>

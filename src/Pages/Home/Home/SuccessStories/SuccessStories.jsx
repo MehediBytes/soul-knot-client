@@ -3,9 +3,6 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 import UseStory from "../../../../Hooks/UseStory";
-// import useAxiosPublic from "../../../../Hooks/UseAxiosPublic";
-// import { useQuery } from "@tanstack/react-query";
-
 
 const SuccessStories = () => {
 
@@ -59,7 +56,7 @@ const SuccessStories = () => {
                     <Slider className="" {...settings}>
                         {stories.map((story) => (
                             <div
-                                key={story.id}
+                                key={story._id}
                                 className="p-5"
                             >
                                 <div className="mb-4">

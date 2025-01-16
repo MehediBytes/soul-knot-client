@@ -6,6 +6,8 @@ import Contact from "../Pages/Home/Contact/Contact";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import BiodataPage from "../Pages/Home/BiodataPage/BiodataPage";
+import PrivateRoute from "./PrivateRoute";
+import ProfileDetails from "../Pages/Home/ProfileDetails/ProfileDetails";
 
 export const router = createBrowserRouter([
 
@@ -21,6 +23,10 @@ export const router = createBrowserRouter([
         {
             path: '/biodata',
             element: <BiodataPage></BiodataPage>
+        },
+        {
+            path: '/profileDetails/:id',
+            element: <PrivateRoute> <ProfileDetails></ProfileDetails> </PrivateRoute>
         },
         {
             path: '/about',

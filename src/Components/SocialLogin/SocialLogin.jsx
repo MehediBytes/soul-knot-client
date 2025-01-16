@@ -33,7 +33,9 @@ const SocialLogin = () => {
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                        if(res.data?.email){
+                            navigate(from, { replace: true });
+                        }
                     })
             })
     }

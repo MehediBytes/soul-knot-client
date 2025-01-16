@@ -8,7 +8,7 @@ const BiodataPage = () => {
     const [divisionFilter, setDivisionFilter] = useState("");
     const [filteredBiodata, setFilteredBiodata] = useState([]);
     const [biodata, loading] = UseBiodata();
-    const [currentPage, setCurrentPage] = useState(1); // Pagination state
+    const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
     useEffect(() => {
@@ -139,7 +139,7 @@ const BiodataPage = () => {
                             onClick={() => setCurrentPage(index + 1)}
                             className={`mx-1 px-4 py-2 rounded ${
                                 currentPage === index + 1
-                                    ? "bg-blue-500 text-white"
+                                    ? "bg-pink-500 text-white"
                                     : "bg-gray-200 text-gray-700"
                             }`}
                         >
