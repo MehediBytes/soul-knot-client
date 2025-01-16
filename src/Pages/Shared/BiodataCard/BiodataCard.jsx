@@ -27,7 +27,7 @@ const BiodataCard = ({ profile }) => {
                 </div>
                 <div>
                     <button className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700">
-                        <Link to={`/profileDetails/${profile._id}`}>
+                        <Link to={`/biodata/${profile._id}`}>
                             View Profile
                         </Link>
                     </button>
