@@ -8,6 +8,8 @@ const BiodataPage = () => {
     const [divisionFilter, setDivisionFilter] = useState("");
     const [filteredBiodata, setFilteredBiodata] = useState([]);
     const [biodata, loading] = UseBiodata();
+    const [currentPage, setCurrentPage] = useState(1); // Pagination state
+    const itemsPerPage = 8;
 
     useEffect(() => {
         const applyFilters = () => {
@@ -43,6 +45,13 @@ const BiodataPage = () => {
         }
     }, [biodata, ageRange, genderFilter, divisionFilter]);
 
+        // Calculate paginated data
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedBiodata = filteredBiodata.slice(startIndex, endIndex);
+    
+        const totalPages = Math.ceil(filteredBiodata.length / itemsPerPage);
+
     // Loading state while fetching data
     if (loading) {
         return (
@@ -59,7 +68,7 @@ const BiodataPage = () => {
                 <h3 className="text-lg font-bold mb-4">Filter Options</h3>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium">Age Range</label>
+                    <label className="block text-sm font-medium mb-1">Age Range</label>
                     <select
                         value={ageRange}
                         onChange={(e) => setAgeRange(e.target.value)}
@@ -73,7 +82,7 @@ const BiodataPage = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-sm font-medium">Gender</label>
+                    <label className="block text-sm font-medium mb-1">Gender</label>
                     <select
                         value={genderFilter}
                         onChange={(e) => setGenderFilter(e.target.value)}
@@ -86,7 +95,7 @@ const BiodataPage = () => {
                 </div>
 
                 <div className="">
-                    <label className="block text-sm font-medium">Division</label>
+                    <label className="block text-sm font-medium mb-1">Division</label>
                     <select
                         value={divisionFilter}
                         onChange={(e) => setDivisionFilter(e.target.value)}
@@ -96,6 +105,7 @@ const BiodataPage = () => {
                         <option value="Dhaka">Dhaka</option>
                         <option value="Chattagram">Chattagram</option>
                         <option value="Rangpur">Rangpur</option>
+                        <option value="Rajshahi">Rajshahi</option>
                         <option value="Barisal">Barisal</option>
                         <option value="Khulna">Khulna</option>
                         <option value="Mymensingh">Mymensingh</option>
@@ -111,15 +121,32 @@ const BiodataPage = () => {
                     <h3 className="tex-xl font-semibold">Total Biodata: {biodata.length}</h3>
                 </div>
 
-                {filteredBiodata.length > 0 ? (
+                {paginatedBiodata.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {filteredBiodata.map((bio) => (
+                        {paginatedBiodata.map((bio) => (
                             <BiodataCard key={bio._id} profile={bio}></BiodataCard>
                         ))}
                     </div>
                 ) : (
                     <p className="text-xl font-semibold text-red-500">No biodata found.</p>
                 )}
+
+                {/* Pagination Controls */}
+                <div className="mt-6 flex justify-center">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrentPage(index + 1)}
+                            className={`mx-1 px-4 py-2 rounded ${
+                                currentPage === index + 1
+                                    ? "bg-blue-500 text-white"
+                                    : "bg-gray-200 text-gray-700"
+                            }`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
             </div>
         </div>
     );
