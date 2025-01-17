@@ -3,10 +3,12 @@ import { FaBarsStaggered, FaUser } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import useAdmin from '../../../Hooks/UseAdmin';
 
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
+    const [isAdmin] = useAdmin();
 
     // State for toggling mobile menu
     const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +47,16 @@ const Navbar = () => {
 
         <Link to={"/contact"} className={`p-1 ${location.pathname === '/contact' ? 'border-b-2 rounded-lg border-white' : ''}`}>Contact Us</Link>
 
-        {user?.email && <Link to={"/dashboard"} className={`p-1 ${location.pathname === '/dashboard' ? 'border-b-2 rounded-lg border-white' : ''}`}>Dashboard</Link>}
+        {
+            user && isAdmin && <Link to={"/dashboard/adminHome"}
+                className={`p-1 ${location.pathname === '/dashboard/adminHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
+            >Dashboard</Link>
+        }
+        {
+            user && !isAdmin && <Link to={"/dashboard/userHome"}
+            className={`p-1 ${location.pathname === '/dashboard/userHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
+            >Dashboard</Link>
+        }
     </>
 
     return (
@@ -77,7 +88,7 @@ const Navbar = () => {
                                 title={user?.displayName || "User"} />
                         </div>
                         <button onClick={handleLogout}
-                        className='border rounded-lg px-2 py-1 hover:bg-pink-700'>Log out</button>
+                            className='border rounded-lg px-2 py-1 hover:bg-pink-700'>Log out</button>
                     </div>
                     :
                     <div className='flex items-center gap-2'>
