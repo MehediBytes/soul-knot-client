@@ -48,13 +48,6 @@ const HowItWorks = () => {
                         </div>
                     ))}
                 </div>
-
-                {/* TOD: if the user login then showing the button your dashboard if not then link them to log in page */}
-                <div className="mt-5">
-                    <button className="bg-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-                        Get Started Now
-                    </button>
-                </div>
             </div>
         </section>
     );

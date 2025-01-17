@@ -8,12 +8,12 @@ const BiodataCard = ({ profile }) => {
     return (
         <div
             key={profile?._id}
-            className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col flex-grow justify-between"
+            className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col flex-grow justify-between"
         >
             <img
                 src={profile?.profileImageLink}
                 alt={profile?.name}
-                className="w-32 h-32 rounded-full  border-2 border-pink-500 mx-auto mt-2 object-cover"
+                className="w-32 h-32 rounded-full border-2 border-pink-500 mx-auto mt-2 object-cover"
             />
             <div className="p-4 text-center">
                 <div className="text-center border-2 border-pink-500 rounded">
@@ -27,7 +27,7 @@ const BiodataCard = ({ profile }) => {
                     <p className=""><strong>Age:</strong> {profile?.age}</p>
                 </div>
                 <div>
-                    <button className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700">
+                    <button className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700">
                         <Link to={`/biodata/${profile?._id}`}>
                             View Profile
                         </Link>
