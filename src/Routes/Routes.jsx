@@ -17,6 +17,10 @@ import ViewBiodata from "../Pages/Dashboard/UserHome/ViewBiodata";
 import FavouritesBiodata from "../Pages/Dashboard/UserHome/FavouritesBiodata";
 import ContactRequest from "../Pages/Dashboard/UserHome/ContactRequest";
 import GotMarried from "../Pages/Dashboard/UserHome/GotMarried";
+import ManageUsers from "../Pages/Dashboard/AdminHome/ManageUsers";
+import ApprovedPremium from "../Pages/Dashboard/AdminHome/ApprovedPremium";
+import ApprovedContact from "../Pages/Dashboard/AdminHome/ApprovedContact";
+import SuccessStory from "../Pages/Dashboard/AdminHome/SuccessStory";
 
 export const router = createBrowserRouter([
 
@@ -88,7 +92,23 @@ export const router = createBrowserRouter([
             // admin only routes
             {
                 path: 'adminHome',
-                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+                element: <AdminRoute> <AdminHome></AdminHome> </AdminRoute>
+            },
+            {
+                path: 'manageUsers',
+                element: <AdminRoute> <ManageUsers></ManageUsers> </AdminRoute>
+            },
+            {
+                path: 'approvedPremium',
+                element: <AdminRoute> <ApprovedPremium></ApprovedPremium> </AdminRoute>
+            },
+            {
+                path: 'approvedContact',
+                element: <AdminRoute> <ApprovedContact></ApprovedContact> </AdminRoute>
+            },
+            {
+                path: 'successStory',
+                element: <AdminRoute> <SuccessStory></SuccessStory> </AdminRoute>
             },
 
         ]

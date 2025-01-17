@@ -45,6 +45,34 @@ const Dashboard = () => {
                                     {user?.displayName} Dashboard
                                 </Link>
                             </div>
+                            <div>
+                                <Link to={"/dashboard/manageUsers"}
+                                    className={`p-1 ${location.pathname === '/dashboard/manageUsers' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                                >
+                                    Manage Users
+                                </Link>
+                            </div>
+                            <div>
+                                <Link to={"/dashboard/approvedPremium"}
+                                    className={`p-1 ${location.pathname === '/dashboard/approvedPremium' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                                >
+                                    Approved Premium
+                                </Link>
+                            </div>
+                            <div>
+                                <Link to={"/dashboard/approvedContact"}
+                                    className={`p-1 ${location.pathname === '/dashboard/approvedContact' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                                >
+                                    Approved Contact Request
+                                </Link>
+                            </div>
+                            <div>
+                                <Link to={"/dashboard/successStory"}
+                                    className={`p-1 ${location.pathname === '/dashboard/successStory' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                                >
+                                    Success Story
+                                </Link>
+                            </div>
 
                         </>
                             : <>
