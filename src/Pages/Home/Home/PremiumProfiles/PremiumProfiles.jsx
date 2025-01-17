@@ -28,7 +28,7 @@ const PremiumProfiles = () => {
                 <h3 className="text-3xl font-bold text-pink-500">Our Premium Members</h3>
             </div>
             {/* Dropdown for sorting */}
-            <div className="p-4">
+            <div className="">
                 <label className="mr-2 font-semibold">Sort by Age:</label>
                 <select
                     value={sortOrder}
@@ -40,7 +40,7 @@ const PremiumProfiles = () => {
                 </select>
             </div>
             {/* Profile Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                 {sortedPremium.map((profile) => (
                     <BiodataCard key={profile._id} profile={profile}></BiodataCard>
                 ))}

@@ -3,11 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaRegHandshake } from "react-icons/fa6";
+import BiodataCard from "../../Shared/BiodataCard/BiodataCard";
+import UseBiodata from "../../../Hooks/UseBiodata";
+
 
 const BiodataDetails = () => {
 
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
+    const [allBiodata, loading] = UseBiodata();
 
     const { data: biodata = [] } = useQuery({
         queryKey: ['biodata', id],
@@ -17,7 +21,18 @@ const BiodataDetails = () => {
         }
     })
 
-    console.log(biodata);
+    const similarBiodata = allBiodata.filter(
+        (item) => item.biodataType === biodata.biodataType && item.id !== biodata._id
+    ).slice(0, 3);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
+            </div>
+        );
+    }
+
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-5">
@@ -60,7 +75,7 @@ const BiodataDetails = () => {
 
                     </div>
                     <div className="border-2 p-1 rounded">
-                        {/* TODO: need to be dynamic */}
+                        {/* TODO: need to be dynamic user must be premium to see the contact info*/}
                         <p><strong>Mail: </strong> {biodata.contactEmail}</p>
                         <p className="text-gray-500"><strong>Mobile: </strong> {biodata.mobileNumber}</p>
 
@@ -77,8 +92,23 @@ const BiodataDetails = () => {
                 </div>
                 <div className="flex items-center gap-2 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700">
                     <button>Request Contact Information</button>
-                    <FaRegHandshake className="text-xl"/>
+                    <FaRegHandshake className="text-xl" />
                 </div>
+            </div>
+
+            <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-5">Similar Biodata :</h2>
+                {similarBiodata?.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {
+                            similarBiodata.map((item) => (
+                                <BiodataCard key={item._id} profile={item}></BiodataCard>
+                            ))
+                        }
+                    </div>
+                ) : (
+                    <p className="text-red-500">No similar biodata found.</p>
+                )}
             </div>
         </div>
     );
