@@ -1,8 +1,17 @@
+import useAuth from "../../../Hooks/useAuth";
 
 const UserHome = () => {
+
+    const {user} = useAuth();
+
     return (
         <div>
-            <h3>User dashboard home is here...</h3>
+            <h2 className="text-4xl text-pink-500">
+                <span>Hi, Welcome </span>
+                {
+                    user?.displayName ? user.displayName : 'Back'
+                }
+            </h2>
         </div>
     );
 };

@@ -12,6 +12,11 @@ import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import AdminRoute from "./AdminRoute";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import Dashboard from "../Layouts/Dashboard";
+import EditBiodata from "../Pages/Dashboard/UserHome/EditBiodata";
+import ViewBiodata from "../Pages/Dashboard/UserHome/ViewBiodata";
+import FavouritesBiodata from "../Pages/Dashboard/UserHome/FavouritesBiodata";
+import ContactRequest from "../Pages/Dashboard/UserHome/ContactRequest";
+import GotMarried from "../Pages/Dashboard/UserHome/GotMarried";
 
 export const router = createBrowserRouter([
 
@@ -58,6 +63,26 @@ export const router = createBrowserRouter([
             {
                 path: 'userHome',
                 element: <UserHome></UserHome>
+            },
+            {
+                path: 'editBiodata',
+                element: <EditBiodata></EditBiodata>
+            },
+            {
+                path: 'viewBiodata',
+                element: <ViewBiodata></ViewBiodata>
+            },
+            {
+                path: 'contactRequest',
+                element: <ContactRequest></ContactRequest>
+            },
+            {
+                path: 'favouritesBiodata',
+                element: <FavouritesBiodata></FavouritesBiodata>
+            },
+            {
+                path: 'gotMarried',
+                element: <GotMarried></GotMarried>
             },
 
             // admin only routes

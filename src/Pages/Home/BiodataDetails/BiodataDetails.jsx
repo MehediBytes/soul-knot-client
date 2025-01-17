@@ -38,10 +38,13 @@ const BiodataDetails = () => {
         <div className="max-w-7xl mx-auto px-4 py-5">
             <div className="md:flex items-center flex-grow gap-10">
                 <div className="md:w-1/2">
-                    <img className="w-full h-96" src={biodata.profileImageLink} alt="" />
+                    <img className="w-full h-96 rounded" src={biodata.profileImageLink} alt="" />
                 </div>
                 <div className="md:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <h3 className="text-3xl font-bold text-pink-500 mb-2 md:col-span-2 text-center">{biodata.name}</h3>
+                    <div className="mb-2 md:col-span-2">
+                        <h3 className="text-3xl font-bold text-pink-500 text-center">{biodata.name}</h3>
+                        <h3 className="text-center"><strong>Biodata ID: </strong> {biodata.biodataId}</h3>
+                    </div>
                     <div className="border-2 rounded p-1">
                         <p><strong>Occupation: </strong> {biodata.occupation}</p>
                         <p className="text-gray-500"><strong>Gender: </strong> {biodata.biodataType}</p>

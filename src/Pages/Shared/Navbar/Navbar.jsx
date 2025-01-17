@@ -100,7 +100,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             <div
-                className={`lg:hidden ${isOpen ? 'block' : 'hidden'} absolute bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 mt-2 rounded-md`}
+                className={`lg:hidden ${isOpen ? 'block' : 'hidden'} absolute bg-pink-500 text-white p-4 mt-2 rounded-md`}
                 style={{ top: '50px', left: 0 }}
             >
                 <div className="flex flex-col items-center space-y-4">
