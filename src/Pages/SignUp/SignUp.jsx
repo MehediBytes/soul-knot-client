@@ -20,12 +20,13 @@ const SignUp = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 setUser(loggedUser);
-                updateUserProfile(data?.name, data?.photoURL)
+                updateUserProfile(data?.name, data?.photoURL, data?.memberType)
                     .then(() => {
                         const userInfo = {
                             name: data.name,
                             email: data.email,
-                            photo: data.photoURL
+                            photo: data.photoURL,
+                            memberType: "standard"
                         }
                         axiosPublic.post('/users', userInfo)
                             .then(res => {

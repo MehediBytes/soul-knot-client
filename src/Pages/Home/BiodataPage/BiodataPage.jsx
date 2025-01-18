@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import UseBiodata from "../../../Hooks/UseBiodata";
 import BiodataCard from "../../Shared/BiodataCard/BiodataCard";
+import useAuth from "../../../Hooks/useAuth";
 
 const BiodataPage = () => {
     const [ageRange, setAgeRange] = useState("");
@@ -10,10 +11,16 @@ const BiodataPage = () => {
     const [biodata, loading] = UseBiodata();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
+    const {user} = useAuth();
+
 
     useEffect(() => {
         const applyFilters = () => {
             const result = biodata.filter((bio) => {
+                if (bio.contactEmail === user?.email) {
+                    return false;
+                }
+
                 const ageInRange = (age) => {
                     switch (ageRange) {
                         case "18-30":
@@ -43,7 +50,7 @@ const BiodataPage = () => {
         if (biodata.length > 0) {
             applyFilters();
         }
-    }, [biodata, ageRange, genderFilter, divisionFilter]);
+    }, [biodata, ageRange, genderFilter, divisionFilter, user?.email]);
 
         // Calculate paginated data
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -118,7 +125,7 @@ const BiodataPage = () => {
             <div className="md:w-3/4 w-full md:min-h-screen p-4">
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="text-2xl font-bold">Biodata List</h2>
-                    <h3 className="tex-xl font-semibold">Total Biodata: {biodata.length}</h3>
+                    <h3 className="tex-xl font-semibold">Total Biodata: {paginatedBiodata.length}</h3>
                 </div>
 
                 {paginatedBiodata.length > 0 ? (

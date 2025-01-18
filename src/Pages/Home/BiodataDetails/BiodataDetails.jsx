@@ -5,6 +5,9 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaRegHandshake } from "react-icons/fa6";
 import BiodataCard from "../../Shared/BiodataCard/BiodataCard";
 import UseBiodata from "../../../Hooks/UseBiodata";
+import usePremium from "../../../Hooks/UsePremium";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 
 const BiodataDetails = () => {
@@ -12,6 +15,9 @@ const BiodataDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     const [allBiodata, loading] = UseBiodata();
+    const [isPremium] = usePremium();
+    console.log(isPremium);
+    const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
 
     const { data: biodata = [] } = useQuery({
         queryKey: ['biodata', id],
@@ -33,6 +39,32 @@ const BiodataDetails = () => {
         );
     }
 
+    const handleAddToFavorites = async () => {
+        try {
+            const response = await axiosSecure.post('/favorites', biodata);
+            if (response.data.insertedId) {
+                setIsAddedToFavorites(true);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Added to Favorites!',
+                    text: `${biodata.name} has been added to your favorites.`,
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Failed to add biodata to favorites. Please try again.',
+                });
+            }
+        } catch (error) {
+            console.error("Error adding to favorites:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: 'Something went wrong. Please try again later.',
+            });
+        }
+    };
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-5">
@@ -78,20 +110,36 @@ const BiodataDetails = () => {
 
                     </div>
                     <div className="border-2 p-1 rounded">
-                        {/* TODO: need to be dynamic user must be premium to see the contact info*/}
-                        <p><strong>Mail: </strong> {biodata.contactEmail}</p>
-                        <p className="text-gray-500"><strong>Mobile: </strong> {biodata.mobileNumber}</p>
-
+                        {isPremium ?
+                            <div>
+                                <p><strong>Mail: </strong> {biodata.contactEmail}</p>
+                                <p className="text-gray-500"><strong>Mobile: </strong> {biodata.mobileNumber}</p>
+                            </div> :
+                            <div>
+                                <h3 className="text-pink-500">Please request for contact informations</h3>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
             <div className="flex justify-center items-center gap-10 mt-10">
-                <div className="flex items-center gap-2 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700">
-                    <button>Add to Favourites</button>
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-full 
+                    ${isAddedToFavorites ? "bg-gray-400 cursor-not-allowed" : "bg-pink-500 text-white hover:bg-pink-700"}`}>
+                    <button
+                        onClick={handleAddToFavorites}
+                        disabled={isAddedToFavorites}
+                        className={isAddedToFavorites ? "cursor-not-allowed" : ""}
+                    >
+                        {isAddedToFavorites ? "Added to Favorites" : "Add to Favorites"}
+                    </button>
                     <IoIosAddCircleOutline className="text-xl" />
                 </div>
-                <div className="flex items-center gap-2 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700">
-                    <button>Request Contact Information</button>
+
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-full ${isPremium
+                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    : "bg-pink-500 text-white hover:bg-pink-700"
+                    }`}>
+                    <button disabled={isPremium}>Request Contact Information</button>
                     <FaRegHandshake className="text-xl" />
                 </div>
             </div>
