@@ -4,12 +4,17 @@ import UseBiodata from "../../../Hooks/UseBiodata";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import axios from "axios";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const EditBiodata = () => {
     const { user } = useAuth();
-    const [allBiodata, loading, refetch] = UseBiodata();
+    const [allBiodata, , refetch] = UseBiodata();
     const [biodata, setBiodata] = useState(null);
     const axiosSecure = useAxiosSecure();
+    const [loading, setLoading] = useState(false);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -23,38 +28,55 @@ const EditBiodata = () => {
         }
     }, [allBiodata, user.email, reset]);
 
-    const onSubmit = (data) => {
-        if (biodata) {
-            // PATCH method: Update existing biodata
-            axiosSecure.patch(`/biodata/${biodata._id}`, data)
-                .then(response => {
-                    if (response.data.modifiedCount > 0) {
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Biodata updated successfully.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                    refetch();
-                })
-        } else {
-            // patch method: update  biodata
-            axiosSecure.post('/biodata', { ...data, memberType: "Standard" })
-                .then(response => {
+    const onSubmit = async (data) => {
+        setLoading(true);
+        try {
+            let imgUrl = biodata?.profileImageLink || "";
 
-                    if (response.data.insertedId) {
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: 'Biodata created successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                    refetch();
-                })
+            // Handle profile image upload if a new image is provided
+            if (data.profileImageLink?.[0]) {
+                const formData = new FormData();
+                formData.append("image", data.profileImageLink[0]);
+
+                const imgResponse = await axios.post(image_hosting_api, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                });
+
+                const imgResult = imgResponse.data;
+                if (imgResult.success) {
+                    imgUrl = imgResult.data.display_url;
+                } else {
+                    Swal.fire("Error", "Image upload failed", "error");
+                    setLoading(false);
+                    return;
+                }
+            }
+
+            // Construct biodata payload
+            const biodataPayload = {
+                ...data,
+                contactEmail: user.email,
+                profileImageLink: imgUrl,
+            };
+
+            if (biodata) {
+                // Update existing biodata
+                await axiosSecure.patch(`/biodata/${biodata._id}`, biodataPayload);
+                Swal.fire("Success", "Biodata updated successfully!", "success");
+            } else {
+                // Create new biodata
+                await axiosSecure.post("/biodata", biodataPayload);
+                Swal.fire("Success", "Biodata created successfully!", "success");
+            }
+
+            refetch();
+        } catch (error) {
+            console.error(error);
+            Swal.fire("Error", "An error occurred while saving biodata", "error");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -94,11 +116,13 @@ const EditBiodata = () => {
                 {errors.name && <span className="text-red-500">{errors.name.message}</span>}
 
                 {/* Profile Image */}
-                <label className="block mb-2">Profile Image Link</label>
+                <label className="block mb-2">Profile Image File</label>
                 <input
-                    {...register("profileImageLink", { required: "Profile image url is required" })}
-                    className="w-full mb-4 p-2 border rounded-md"
-                    placeholder="Profile Image URL"
+                    {...register("profileImageLink", { required: "Profile image file is required" })}
+                    className=" mb-4 p-2"
+                    type="file"
+                    accept="image/*"
+                    placeholder="Profile Image file"
                 />
                 {errors.profileImageLink && <span className="text-red-500">{errors.profileImageLink.message}</span>}
 

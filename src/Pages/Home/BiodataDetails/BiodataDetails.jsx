@@ -7,17 +7,20 @@ import BiodataCard from "../../Shared/BiodataCard/BiodataCard";
 import UseBiodata from "../../../Hooks/UseBiodata";
 import usePremium from "../../../Hooks/UsePremium";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAuth from "../../../Hooks/useAuth";
+import UseFavourites from "../../../Hooks/UseFavourites";
 
 
 const BiodataDetails = () => {
 
+    const { user } = useAuth();
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     const [allBiodata, loading] = UseBiodata();
     const [isPremium] = usePremium();
-    console.log(isPremium);
-    const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
+    const [favoritesStatus, setFavoritesStatus] = useState({});
+    const [userFavorites, favoritesLoading, refetchFavorites] = UseFavourites();
 
     const { data: biodata = [] } = useQuery({
         queryKey: ['biodata', id],
@@ -31,23 +34,29 @@ const BiodataDetails = () => {
         (item) => item.biodataType === biodata.biodataType && item.id !== biodata._id
     ).slice(0, 3);
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (userFavorites) {
+            const favoritesMap = {};
+            userFavorites.forEach(item => {
+                favoritesMap[item.biodataId] = item.userFavorite === user?.email;
+            });
+            setFavoritesStatus(favoritesMap);
+        }
+    }, [userFavorites, user?.email]);
 
     const handleAddToFavorites = async () => {
         try {
-            const response = await axiosSecure.post('/favorites', biodata);
+            const response = await axiosSecure.post('/favorites', {
+                biodataId: biodata._id,
+                userFavorite: user?.email
+            });
+
             if (response.data.insertedId) {
-                setIsAddedToFavorites(true);
+                refetchFavorites()
                 Swal.fire({
                     icon: 'success',
                     title: 'Added to Favorites!',
-                    text: `${biodata.name} has been added to your favorites.`,
+                    text: `${biodata?.name} has been added to your favorites.`,
                 });
             } else {
                 Swal.fire({
@@ -65,6 +74,14 @@ const BiodataDetails = () => {
             });
         }
     };
+
+    if (loading || favoritesLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-5">
@@ -124,13 +141,13 @@ const BiodataDetails = () => {
             </div>
             <div className="flex justify-center items-center gap-10 mt-10">
                 <div className={`flex items-center gap-2 px-4 py-2 rounded-full 
-                    ${isAddedToFavorites ? "bg-gray-400 cursor-not-allowed" : "bg-pink-500 text-white hover:bg-pink-700"}`}>
+                    ${favoritesStatus[biodata._id] ? "bg-gray-400 cursor-not-allowed" : "bg-pink-500 text-white hover:bg-pink-700"}`}>
                     <button
                         onClick={handleAddToFavorites}
-                        disabled={isAddedToFavorites}
-                        className={isAddedToFavorites ? "cursor-not-allowed" : ""}
+                        disabled={favoritesStatus[biodata._id]}
+                        className={favoritesStatus[biodata._id] ? "cursor-not-allowed" : ""}
                     >
-                        {isAddedToFavorites ? "Added to Favorites" : "Add to Favorites"}
+                        {favoritesStatus[biodata._id] ? "Added to Favorites" : "Add to Favorites"}
                     </button>
                     <IoIosAddCircleOutline className="text-xl" />
                 </div>
