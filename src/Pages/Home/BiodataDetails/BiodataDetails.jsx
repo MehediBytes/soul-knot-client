@@ -83,9 +83,6 @@ const BiodataDetails = () => {
                         <p className="text-gray-500"><strong>Mobile: </strong> {biodata.mobileNumber}</p>
 
                     </div>
-
-                    {/* TODO: need to be dynamic */}
-                    <p className="capitalize md:col-span-2 text-center font-bold">{biodata.memberType} Member</p>
                 </div>
             </div>
             <div className="flex justify-center items-center gap-10 mt-10">

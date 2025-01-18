@@ -228,7 +228,8 @@
         "expectedPartnerWeight": "55-65kg",
         "contactEmail": "rahimuddin@example.com",
         "mobileNumber": "01623456789",
-        "memberType": "standard"
+        "memberType": "standard",
+        "biodataId": 1
     },
     {
         "biodataType": "Female",
