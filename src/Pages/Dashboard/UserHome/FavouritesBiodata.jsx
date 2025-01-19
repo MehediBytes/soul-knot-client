@@ -71,7 +71,7 @@ const FavouritesBiodata = () => {
                 <div className="overflow-x-auto">
                     <table className="table-auto w-full border-collapse border border-gray-300">
                         <thead>
-                            <tr className="bg-gray-100">
+                            <tr className="bg-white">
                                 <th className="border border-gray-300 p-2">#</th>
                                 <th className="border border-gray-300 p-2">Name</th>
                                 <th className="border border-gray-300 p-2">Biodata ID</th>
@@ -90,7 +90,7 @@ const FavouritesBiodata = () => {
                                     <td className="border border-gray-300 p-2">{favorite.biodata.occupation}</td>
                                     <td className="border border-gray-300 p-2">
                                         <button
-                                            className="bg-white text-red-500 rounded-full p-2"
+                                            className="bg-white text-red-500 rounded-full p-2 hover:bg-red-200"
                                             onClick={() => handleDelete(favorite._id)}
                                         >
                                             <FaTrash />
