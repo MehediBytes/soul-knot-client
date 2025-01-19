@@ -21,6 +21,7 @@ import ManageUsers from "../Pages/Dashboard/AdminHome/ManageUsers";
 import ApprovedPremium from "../Pages/Dashboard/AdminHome/ApprovedPremium";
 import ApprovedContact from "../Pages/Dashboard/AdminHome/ApprovedContact";
 import SuccessStory from "../Pages/Dashboard/AdminHome/SuccessStory";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
 
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -59,9 +61,12 @@ export const router = createBrowserRouter([
             },
         ]
     },
+
+    // Dashboard layout routes
     {
         path: 'dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             // normal user routes 
             {

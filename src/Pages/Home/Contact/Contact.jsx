@@ -5,14 +5,11 @@ import { MdLocationPin } from 'react-icons/md';
 import { useState } from 'react';
 
 const Contact = () => {
-    // State to store the values of the form
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
     });
-
-    // Handling input changes for the form fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -20,10 +17,8 @@ const Contact = () => {
             [name]: value
         }));
     };
-
-    // Sending email using emailjs
     const sendEmail = async (e) => {
-        e.preventDefault(); // Prevent form refresh
+        e.preventDefault();
 
         try {
             const result = await emailjs.sendForm(
@@ -32,8 +27,6 @@ const Contact = () => {
                 e.target,
                 'Py0rW7WoFLw61Yn7n'
             );
-
-            // Success alert using SweetAlert2
             if (result) {
                 Swal.fire({
                     icon: 'success',
@@ -43,17 +36,14 @@ const Contact = () => {
                     confirmButtonText: 'OK'
                 });
             }
-
-            // Clear form data
             setFormData({
                 name: '',
                 email: '',
                 message: ''
             });
 
-            e.target.reset(); // Reset the form after submission
+            e.target.reset();
         } catch (error) {
-            // Error alert using SweetAlert2
             Swal.fire({
                 icon: 'error',
                 title: 'Error Sending Message',
