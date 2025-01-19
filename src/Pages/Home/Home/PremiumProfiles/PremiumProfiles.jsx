@@ -1,20 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UseBiodata from "../../../../Hooks/UseBiodata";
 import BiodataCard from "../../../Shared/BiodataCard/BiodataCard";
+import UseUsers from "../../../../Hooks/UseUsers";
 
 const PremiumProfiles = () => {
     const [biodata, loading] = UseBiodata();
-    const premium = biodata.filter(data => data.memberType === 'premium')
-
-    // State to manage sort order
+    const [users, usersLoading] = UseUsers();
+    console.log(users);
+    const [premiumBiodata, setPremiumBiodata] = useState([]);
     const [sortOrder, setSortOrder] = useState("ascending");
 
+    useEffect(() => {
+        if (!usersLoading && !loading && users.length && biodata.length) {
+            const premiumUsers = users.filter(user => user.memberType === "premium");
+            const filteredBiodata = biodata.filter(data =>
+                premiumUsers.some(user => user.email === data.contactEmail)
+            );
+            setPremiumBiodata(filteredBiodata);
+        }
+    }, [users, biodata, loading, usersLoading]);
+
     // Sort premium profiles based on age
-    const sortedPremium = [...premium].sort((a, b) =>
+    const sortedPremium = [...premiumBiodata].sort((a, b) =>
         sortOrder === "ascending" ? a.age - b.age : b.age - a.age
     );
 
-    if (loading) {
+    if (loading || usersLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
@@ -45,7 +56,6 @@ const PremiumProfiles = () => {
                     <BiodataCard key={profile._id} profile={profile}></BiodataCard>
                 ))}
             </div>
-            {/* <div className="flex justify-center items-center"><button className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700">View More Profiles</button></div> */}
         </div>
     );
 };
