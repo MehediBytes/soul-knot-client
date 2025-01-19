@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { IoIosAddCircleOutline } from "react-icons/io";
@@ -22,6 +22,7 @@ const BiodataDetails = () => {
     const [isPremium] = usePremium();
     const [favoritesStatus, setFavoritesStatus] = useState({});
     const [userFavorites, favoritesLoading, refetchFavorites] = UseFavourites();
+    const navigate = useNavigate();
 
     const { data: biodata = [] } = useQuery({
         queryKey: ['biodata', id],
@@ -74,6 +75,10 @@ const BiodataDetails = () => {
                 text: 'Something went wrong. Please try again later.',
             });
         }
+    };
+
+    const handleRequestContactInfo = () => {
+        navigate(`/checkout/${biodata.biodataId}`);
     };
 
     if (loading || favoritesLoading) {
@@ -157,10 +162,11 @@ const BiodataDetails = () => {
                 </div>
 
                 <div className={`flex items-center gap-2 px-4 py-2 rounded-full ${isPremium
-                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    ? "bg-gray-400 text-gray-800 cursor-not-allowed"
                     : "bg-pink-500 text-white hover:bg-pink-700"
                     }`}>
-                    <button disabled={isPremium}>Request Contact Information</button>
+                    <button onClick={handleRequestContactInfo}
+                        disabled={isPremium}>Request Contact Information</button>
                     <FaRegHandshake className="text-xl" />
                 </div>
             </div>

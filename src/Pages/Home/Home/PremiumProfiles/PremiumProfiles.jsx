@@ -6,7 +6,6 @@ import UseUsers from "../../../../Hooks/UseUsers";
 const PremiumProfiles = () => {
     const [biodata, loading] = UseBiodata();
     const [users, usersLoading] = UseUsers();
-    console.log(users);
     const [premiumBiodata, setPremiumBiodata] = useState([]);
     const [sortOrder, setSortOrder] = useState("ascending");
 
@@ -51,7 +50,7 @@ const PremiumProfiles = () => {
                 </select>
             </div>
             {/* Profile Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
                 {sortedPremium.map((profile) => (
                     <BiodataCard key={profile._id} profile={profile}></BiodataCard>
                 ))}

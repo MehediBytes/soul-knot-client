@@ -22,6 +22,7 @@ import ApprovedPremium from "../Pages/Dashboard/AdminHome/ApprovedPremium";
 import ApprovedContact from "../Pages/Dashboard/AdminHome/ApprovedContact";
 import SuccessStory from "../Pages/Dashboard/AdminHome/SuccessStory";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Checkout from "../Pages/Checkout/Checkout";
 
 export const router = createBrowserRouter([
 
@@ -42,6 +43,14 @@ export const router = createBrowserRouter([
             {
                 path: '/biodata/:id',
                 element: <PrivateRoute> <BiodataDetails></BiodataDetails> </PrivateRoute>
+            },
+            {
+                path: '/biodata/:id',
+                element: <PrivateRoute> <BiodataDetails></BiodataDetails> </PrivateRoute>
+            },
+            {
+                path: '/checkout/:id',
+                element: <PrivateRoute> <Checkout></Checkout> </PrivateRoute>
             },
             {
                 path: '/about',

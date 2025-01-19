@@ -14,7 +14,6 @@ const BiodataPage = () => {
     const itemsPerPage = 8;
     const { user } = useAuth();
 
-
     useEffect(() => {
         const applyFilters = () => {
             const result = biodata.filter((bio) => {
@@ -46,6 +45,7 @@ const BiodataPage = () => {
             });
 
             setFilteredBiodata(result);
+            setCurrentPage(1);
         };
 
         if (biodata.length > 0) {
@@ -55,8 +55,10 @@ const BiodataPage = () => {
 
     // Calculate paginated data
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const paginatedBiodata = filteredBiodata.slice(startIndex, endIndex);
+    const paginatedBiodata = filteredBiodata.slice(
+        startIndex,
+        startIndex + itemsPerPage
+    );
 
     const totalPages = Math.ceil(filteredBiodata.length / itemsPerPage);
 
@@ -129,7 +131,7 @@ const BiodataPage = () => {
             <div className="md:w-3/4 w-full md:min-h-screen p-4">
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="text-2xl font-bold">Biodata List</h2>
-                    <h3 className="tex-xl font-semibold">Total Biodata: {paginatedBiodata.length}</h3>
+                    <h3 className="tex-xl font-semibold">Total Biodata: {filteredBiodata.length}</h3>
                 </div>
 
                 {paginatedBiodata.length > 0 ? (
@@ -149,8 +151,8 @@ const BiodataPage = () => {
                             key={index}
                             onClick={() => setCurrentPage(index + 1)}
                             className={`mx-1 px-4 py-2 rounded ${currentPage === index + 1
-                                    ? "bg-pink-500 text-white"
-                                    : "bg-gray-200 text-gray-700"
+                                ? "bg-pink-500 text-white"
+                                : "bg-gray-200 text-gray-700"
                                 }`}
                         >
                             {index + 1}
