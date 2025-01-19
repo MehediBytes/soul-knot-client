@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import UseBiodata from "../../../Hooks/UseBiodata";
 import BiodataCard from "../../Shared/BiodataCard/BiodataCard";
 import useAuth from "../../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const BiodataPage = () => {
     const [ageRange, setAgeRange] = useState("");
@@ -11,7 +12,7 @@ const BiodataPage = () => {
     const [biodata, loading] = UseBiodata();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
-    const {user} = useAuth();
+    const { user } = useAuth();
 
 
     useEffect(() => {
@@ -52,12 +53,12 @@ const BiodataPage = () => {
         }
     }, [biodata, ageRange, genderFilter, divisionFilter, user?.email]);
 
-        // Calculate paginated data
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedBiodata = filteredBiodata.slice(startIndex, endIndex);
-    
-        const totalPages = Math.ceil(filteredBiodata.length / itemsPerPage);
+    // Calculate paginated data
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedBiodata = filteredBiodata.slice(startIndex, endIndex);
+
+    const totalPages = Math.ceil(filteredBiodata.length / itemsPerPage);
 
     // Loading state while fetching data
     if (loading) {
@@ -70,6 +71,9 @@ const BiodataPage = () => {
 
     return (
         <div className="md:flex max-w-7xl mb-5 mx-auto px-4">
+            <Helmet>
+                <title>Biodata | Soul-Knot</title>
+            </Helmet>
             {/* Filter Section */}
             <div className="md:w-1/4 w-full p-4 md:min-h-screen md:border-r md:border-gray-400">
                 <h3 className="text-lg font-bold mb-4">Filter Options</h3>
@@ -144,11 +148,10 @@ const BiodataPage = () => {
                         <button
                             key={index}
                             onClick={() => setCurrentPage(index + 1)}
-                            className={`mx-1 px-4 py-2 rounded ${
-                                currentPage === index + 1
+                            className={`mx-1 px-4 py-2 rounded ${currentPage === index + 1
                                     ? "bg-pink-500 text-white"
                                     : "bg-gray-200 text-gray-700"
-                            }`}
+                                }`}
                         >
                             {index + 1}
                         </button>

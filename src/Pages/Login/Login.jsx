@@ -4,6 +4,7 @@ import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const { signIn } = useAuth();
@@ -31,6 +32,9 @@ const Login = () => {
 
     return (
         <div className="md:flex md:items-center md:justify-between md:gap-10 container mx-auto px-5">
+            <Helmet>
+                <title>Login | Soul-Knot</title>
+            </Helmet>
             <div className="md:w-1/2">
                 <img src={loginAnime} className="w-full md:h-full h-72" alt="" />
             </div>

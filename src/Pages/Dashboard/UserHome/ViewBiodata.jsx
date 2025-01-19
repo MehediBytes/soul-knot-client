@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import UseBiodata from "../../../Hooks/UseBiodata";
+import { Helmet } from "react-helmet-async";
 
 
 const ViewBiodata = () => {
@@ -28,6 +29,9 @@ const ViewBiodata = () => {
 
     return (
         <div className="">
+            <Helmet>
+                <title>{user?.displayName}-Biodata | Soul-Knot</title>
+            </Helmet>
             <div>
                 {!biodata ?
                     <div className="">

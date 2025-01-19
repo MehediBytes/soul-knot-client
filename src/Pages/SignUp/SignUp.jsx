@@ -131,6 +131,7 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/UseAxiosPublic";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
     const axiosPublic = useAxiosPublic();
@@ -202,6 +203,9 @@ const SignUp = () => {
 
     return (
         <div className="md:flex md:items-center md:justify-between md:gap-10 container mx-auto px-5">
+            <Helmet>
+                <title>Signup | Soul-Knot</title>
+            </Helmet>
             <div className="md:w-1/2">
                 <img src={signUpAnime} className="w-full md:h-full h-80" alt="" />
             </div>

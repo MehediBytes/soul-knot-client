@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import UseBiodata from "../../../Hooks/UseBiodata";
+import { Helmet } from "react-helmet-async";
 
 const FavouritesBiodata = () => {
     const axiosSecure = useAxiosSecure();
@@ -62,6 +63,9 @@ const FavouritesBiodata = () => {
 
     return (
         <div className="px-4">
+            <Helmet>
+                <title>Favourites-Biodata | Soul-Knot</title>
+            </Helmet>
             <h2 className="text-2xl font-bold text-center text-pink-500 mb-5">My Favorites Biodata</h2>
             {matchedBiodata.length > 0 ? (
                 <div className="overflow-x-auto">

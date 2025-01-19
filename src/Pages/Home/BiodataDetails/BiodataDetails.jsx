@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import UseFavourites from "../../../Hooks/UseFavourites";
+import { Helmet } from "react-helmet-async";
 
 
 const BiodataDetails = () => {
@@ -85,6 +86,9 @@ const BiodataDetails = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-5">
+            <Helmet>
+                <title>Biodata-Details | Soul-Knot</title>
+            </Helmet>
             <div className="md:flex items-center flex-grow gap-10">
                 <div className="md:w-1/2">
                     <img className="w-full h-96 rounded" src={biodata.profileImageLink} alt="" />

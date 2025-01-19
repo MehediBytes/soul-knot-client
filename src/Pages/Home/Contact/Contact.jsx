@@ -3,6 +3,7 @@ import { FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { MdLocationPin } from 'react-icons/md';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -59,6 +60,9 @@ const Contact = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 pb-5">
+            <Helmet>
+                <title>Contact-Us | Soul-Knot</title>
+            </Helmet>
             <div className='text-center pb-5'>
                 <h2 className="text-3xl font-bold text-pink-500">Contact Us</h2>
             </div>

@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
     return (
         <div className="pb-5">
+            <Helmet>
+                <title>About-Us | Soul-Knot</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto px-4">
                 {/* Heading Section */}
                 <motion.h1
