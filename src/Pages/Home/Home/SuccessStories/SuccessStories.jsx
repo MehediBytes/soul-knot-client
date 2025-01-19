@@ -67,7 +67,8 @@ const SuccessStories = () => {
                                     />
                                 </div>
                                 <p className="text-gray-500 text-sm mb-2">
-                                    Married on: {new Date(story.marriageDate).toLocaleDateString()}
+                                    {story.updatedAt ? `Married on:${new Date(story.updatedAt).toLocaleDateString()}` :
+                                        `Married on:${new Date(story.createdAt).toLocaleDateString()}`}
                                 </p>
 
                                 <div className="flex justify-center items-center mb-4">
@@ -88,7 +89,7 @@ const SuccessStories = () => {
                                     })}
                                 </div>
 
-                                <p className="text-gray-700 mb-4">{story.storyText}</p>
+                                <p className="text-gray-700 mb-4">{story.review}</p>
                             </div>
                         ))}
                     </Slider>

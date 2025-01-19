@@ -21,7 +21,6 @@ const FavouritesBiodata = () => {
                 const matchingBiodata = biodata.find(b => b._id === favorite.biodataId);
                 return { ...favorite, biodata: matchingBiodata };
             });
-
             setMatchedBiodata(matchedData);
         }
     }, [userFavorites, biodata]);

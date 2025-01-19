@@ -64,7 +64,7 @@ const Checkout = () => {
             return;
         }
         else{
-            Swal.fire("Payment method ok",paymentMethod);
+            console.log(paymentMethod);
             setError('');
         }
 
@@ -92,6 +92,7 @@ const Checkout = () => {
                 requestEmail: user?.email,
                 paymentId: paymentIntent.id,
                 biodataId,
+                paymentAmount:amount,
                 date: new Date(),
                 status: 'pending',
             };

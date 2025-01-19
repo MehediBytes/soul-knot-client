@@ -9,8 +9,6 @@ const SuccessCounter = () => {
     const totalBiodata = biodata.length;
     const boysCount = biodata.filter((data) => data.biodataType === "Male").length;
     const girlsCount = biodata.filter((data) => data.biodataType === "Female").length;
-
-    // todo: Will replace dynamic value from server
     const marriagesCompleted = stories.length;
 
     if (loading) {
