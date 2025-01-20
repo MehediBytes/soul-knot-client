@@ -32,7 +32,7 @@ const SuccessStory = () => {
     }
 
     return (
-        <div>
+        <div className="max-w-7xl mx-auto">
             <Helmet>
                 <title>Success-Stories | Soul-Knot</title>
             </Helmet>

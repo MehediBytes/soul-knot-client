@@ -63,7 +63,7 @@ const Dashboard = () => {
                                 <Link to={"/dashboard/approvedContact"}
                                     className={`p-1 ${location.pathname === '/dashboard/approvedContact' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                 >
-                                    Approved Contact Request
+                                    Contact Requests
                                 </Link>
                             </div>
                             <div>
@@ -94,7 +94,7 @@ const Dashboard = () => {
                                     <Link to={"/dashboard/viewBiodata"}
                                         className={`p-1 ${location.pathname === '/dashboard/viewBiodata' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                     >
-                                        View Biodata
+                                        My Biodata
                                     </Link>
                                 </div>
                                 <div>
@@ -108,7 +108,7 @@ const Dashboard = () => {
                                     <Link to={"/dashboard/favouritesBiodata"}
                                         className={`p-1 ${location.pathname === '/dashboard/favouritesBiodata' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                     >
-                                        Favourites Biodata
+                                        My Favourites Biodata
                                     </Link>
                                 </div>
                                 <div>

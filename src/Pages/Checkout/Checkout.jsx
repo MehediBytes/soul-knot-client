@@ -92,6 +92,7 @@ const Checkout = () => {
                 requestEmail: user?.email,
                 paymentId: paymentIntent.id,
                 biodataId,
+                userName: user?.displayName,
                 paymentAmount:amount,
                 date: new Date(),
                 status: 'pending',

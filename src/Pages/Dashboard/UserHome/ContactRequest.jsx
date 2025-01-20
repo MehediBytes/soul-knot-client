@@ -4,12 +4,14 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { FaTrash } from "react-icons/fa";
+import UseBiodata from "../../../Hooks/UseBiodata";
 
 
 const ContactRequest = () => {
 
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [biodata, loading] = UseBiodata();
 
     // Fetch Contact Requests
     const { data: requests = [], isLoading, refetch } = useQuery({
@@ -20,6 +22,14 @@ const ContactRequest = () => {
             return res.data;
         },
     });
+
+    // Combine Contact Requests with Biodata
+    const combinedData = requests.map((req) => {
+        const biodataDetails = biodata.find((b) => b.biodataId == req.biodataId);
+        console.log(biodataDetails);
+        return { ...req, ...biodataDetails };
+    });
+    console.log(combinedData);
 
     // Handle Delete Request
     const handleDelete = async (id) => {
@@ -49,7 +59,7 @@ const ContactRequest = () => {
         });
     };
 
-    if (isLoading) {
+    if (isLoading || loading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
@@ -67,32 +77,32 @@ const ContactRequest = () => {
             <h2 className="text-2xl font-bold mb-5 text-pink-500 text-center">
                 My Contact Information Request
             </h2>
-            <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-gray-200">
-                    <thead>
-                        <tr className="bg-white text-center">
-                            <th className="border border-gray-300 px-4 py-2">#</th>
-                            <th className="border border-gray-300 px-4 py-2">Biodata ID</th>
-                            <th className="border border-gray-300 px-4 py-2">Status</th>
-                            <th className="border border-gray-300 px-4 py-2">Mobile No</th>
-                            <th className="border border-gray-300 px-4 py-2">Email</th>
-                            <th className="border border-gray-300 px-4 py-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {requests.length > 0 ? (
-                            requests.map((req, index) => (
+            {combinedData.length > 0 ?
+                <div className="overflow-x-auto">
+                    <table className="w-full border-collapse border border-gray-200">
+                        <thead>
+                            <tr className="bg-white">
+                                <th className="border border-gray-300 px-4 py-2">#</th>
+                                <th className="border border-gray-300 px-4 py-2">Biodata ID</th>
+                                <th className="border border-gray-300 px-4 py-2">Status</th>
+                                <th className="border border-gray-300 px-4 py-2">Mobile No</th>
+                                <th className="border border-gray-300 px-4 py-2">Email</th>
+                                <th className="border border-gray-300 px-4 py-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {combinedData.map((req, index) => (
                                 <tr key={req._id} className="text-center">
                                     <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
                                     <td className="border border-gray-300 px-4 py-2">{req.biodataId}</td>
-                                    <td className={`border border-gray-300 px-4 py-2 capitalize ${req.status === "approved" ? "bg-green-300": "bg-yellow-300"}`}>
+                                    <td className={`border border-gray-300 px-4 py-2 capitalize ${req.status === "approved" ? "bg-green-300" : "bg-yellow-300"}`}>
                                         {req.status}
                                     </td>
                                     <td className="border border-gray-300 px-4 py-2">
-                                        {req.status === "approved" ? req.mobileNo : "N/A"}
+                                        {req.status === "approved" ? req.mobileNumber : "N/A"}
                                     </td>
                                     <td className="border border-gray-300 px-4 py-2">
-                                        {req.status === "approved" ? req.email : "N/A"}
+                                        {req.status === "approved" ? req.contactEmail : "N/A"}
                                     </td>
                                     <td className="border border-gray-300 px-4 py-2 text-center">
                                         <button
@@ -103,17 +113,15 @@ const ContactRequest = () => {
                                         </button>
                                     </td>
                                 </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="6" className="text-center p-5">
-                                    No contact requests found.
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                :
+                <div>
+                    <h3 className="text-red-500">No Contact Request Found</h3>
+                </div>
+            }
         </div>
     );
 };
