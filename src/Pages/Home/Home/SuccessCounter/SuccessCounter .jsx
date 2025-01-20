@@ -24,25 +24,25 @@ const SuccessCounter = () => {
             <h2 className="text-3xl font-bold text-center mb-5 text-pink-500">Success Counter</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Total Biodata */}
-                <div className="bg-green-500 shadow-md rounded-lg p-6 text-center">
+                <div className="bg-green-500 shadow-md rounded-full p-6 text-center">
                     <h3 className="text-2xl font-semibold text-white">Total Biodata</h3>
                     <p className="text-4xl font-bold mt-2">{totalBiodata}</p>
                 </div>
 
                 {/* Boys Biodata */}
-                <div className="bg-blue-500 shadow-md rounded-lg p-6 text-center">
+                <div className="bg-blue-500 shadow-md rounded-full p-6 text-center">
                     <h3 className="text-2xl font-semibold text-white">Boys Biodata</h3>
                     <p className="text-4xl font-bold mt-2">{boysCount}</p>
                 </div>
 
                 {/* Girls Biodata */}
-                <div className="bg-pink-500 shadow-md rounded-lg p-6 text-center">
+                <div className="bg-pink-500 shadow-md rounded-full p-6 text-center">
                     <h3 className="text-2xl font-semibold text-white">Girls Biodata</h3>
                     <p className="text-4xl font-bold mt-2">{girlsCount}</p>
                 </div>
 
                 {/* Marriages Completed */}
-                <div className="bg-purple-500 shadow-md rounded-lg p-6 text-center col-span-1 md:col-span-3">
+                <div className="bg-purple-500 shadow-md rounded-full p-6 text-center col-span-1 md:col-span-3">
                     <h3 className="text-2xl font-semibold text-white">
                         Marriages Completed
                     </h3>

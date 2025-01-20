@@ -189,15 +189,14 @@ const SignUp = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "User created successfully.",
+                    title: "Sign Up successfully.",
                     showConfirmButton: false,
                     timer: 1500,
                 });
                 navigate(from, { replace: true });
             }
         } catch (error) {
-            console.error(error);
-            Swal.fire("Error", "Something went wrong. Please try again.", "error");
+            Swal.fire("Error", "Something went wrong. Please try again.", "error", error);
         }
     };
 

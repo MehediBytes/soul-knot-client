@@ -58,8 +58,9 @@ const EditBiodata = () => {
             // Construct biodata payload
             const biodataPayload = {
                 ...data,
-                contactEmail: user.email,
+                contactEmail: user?.email,
                 profileImageLink: imgUrl,
+                memberType: user?.memberType,
             };
 
             if (biodata) {
@@ -178,7 +179,16 @@ const EditBiodata = () => {
                 <label className="block mb-2">Age</label>
                 <input
                     type="number"
-                    {...register("age", { required: true })}
+                    min="18"
+                    {...register("age", {
+                        required: true,
+                        validate: (value) => {
+                            if (value < 18) {
+                                return "Age must be at least 18";
+                            }
+                            return true;
+                        },
+                    })}
                     className="w-full mb-4 p-2 border rounded-md"
                     placeholder="Age"
                 />
@@ -277,7 +287,16 @@ const EditBiodata = () => {
                 <label className="block mb-2">Expected Partner Age</label>
                 <input
                     type="number"
-                    {...register("expectedPartnerAge", { required: true })}
+                    min="18"
+                    {...register("age", {
+                        required: true,
+                        validate: (value) => {
+                            if (value < 18) {
+                                return "Age must be at least 18";
+                            }
+                            return true;
+                        },
+                    })}
                     className="w-full mb-4 p-2 border rounded-md"
                     placeholder="Expected Partner Age"
                 />

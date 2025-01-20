@@ -8,7 +8,7 @@ const BiodataCard = ({ profile }) => {
     return (
         <div
             key={profile?._id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col flex-grow justify-between"
+            className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col flex-grow justify-between hover:shadow-xl"
         >
             <img
                 src={profile?.profileImageLink}
