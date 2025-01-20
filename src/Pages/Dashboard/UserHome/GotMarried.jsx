@@ -126,9 +126,9 @@ const GotMarried = () => {
                     <input
                         type="number"
                         {...register("partnerBiodataId", {
-                            required: "Partner Biodata ID is required", 
+                            required: "Partner Biodata ID is required",
                             validate: (value) => {
-                                if(userBio?.biodataId){
+                                if (userBio?.biodataId) {
                                     return "This is your Biodata Id"
                                 }
                                 if (value < 1) {
@@ -143,6 +143,14 @@ const GotMarried = () => {
                         <p className="text-red-500 text-sm mt-1">{errors.partnerBiodataId.message}</p>
                     )}
                 </div>
+                {/* Marriage date */}
+                <label className="block mb-2">Date of Birth</label>
+                <input
+                    type="date"
+                    {...register("marriageDate", { required: "Marriage Date is required" })}
+                    className="w-full mb-4 p-2 border rounded-md"
+                />
+                {errors.marriageDate && <span className="text-red-500">{errors.marriageDate.message}</span>}
                 {/* ratings */}
                 <div className="mb-4">
                     <label className="block text-gray-700 font-medium mb-2">Ratings</label>

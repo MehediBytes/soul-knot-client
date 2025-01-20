@@ -25,28 +25,28 @@ const SuccessCounter = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Total Biodata */}
                 <div className="bg-green-500 shadow-md rounded-full p-6 text-center">
-                    <h3 className="text-2xl font-semibold text-white">Total Biodata</h3>
-                    <p className="text-4xl font-bold mt-2">{totalBiodata}</p>
+                    <h3 className="text-2xl font-bold text-white">Total Biodata</h3>
+                    <p className="text-3xl font-bold mt-2">{totalBiodata}</p>
                 </div>
 
                 {/* Boys Biodata */}
                 <div className="bg-blue-500 shadow-md rounded-full p-6 text-center">
-                    <h3 className="text-2xl font-semibold text-white">Boys Biodata</h3>
-                    <p className="text-4xl font-bold mt-2">{boysCount}</p>
+                    <h3 className="text-2xl font-bold text-white">Boys Biodata</h3>
+                    <p className="text-3xl font-bold mt-2">{boysCount}</p>
                 </div>
 
                 {/* Girls Biodata */}
                 <div className="bg-pink-500 shadow-md rounded-full p-6 text-center">
-                    <h3 className="text-2xl font-semibold text-white">Girls Biodata</h3>
-                    <p className="text-4xl font-bold mt-2">{girlsCount}</p>
+                    <h3 className="text-2xl font-bold text-white">Girls Biodata</h3>
+                    <p className="text-3xl font-bold mt-2">{girlsCount}</p>
                 </div>
 
                 {/* Marriages Completed */}
                 <div className="bg-purple-500 shadow-md rounded-full p-6 text-center col-span-1 md:col-span-3">
-                    <h3 className="text-2xl font-semibold text-white">
+                    <h3 className="text-2xl font-bold text-white">
                         Marriages Completed
                     </h3>
-                    <p className="text-4xl font-bold mt-2">{marriagesCompleted}</p>
+                    <p className="text-3xl font-bold mt-2">{marriagesCompleted}</p>
                 </div>
             </div>
         </div>
