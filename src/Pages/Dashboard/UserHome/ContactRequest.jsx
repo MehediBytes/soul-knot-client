@@ -6,9 +6,7 @@ import Swal from "sweetalert2";
 import { FaTrash } from "react-icons/fa";
 import UseBiodata from "../../../Hooks/UseBiodata";
 
-
 const ContactRequest = () => {
-
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [biodata, loading] = UseBiodata();

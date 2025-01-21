@@ -20,7 +20,7 @@ const ApprovedContact = () => {
                 const matchedBiodata = biodata.find((b) => b.biodataId === payment.biodataId);
                 return {
                     ...payment,
-                    userGender: matchedBiodata?.gender || "Unknown",
+                    userGender: matchedBiodata?.biodataType || "Unknown",
                 };
             });
             setCombinedData(mergedData);

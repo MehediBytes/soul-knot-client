@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import UseFavourites from "../../../Hooks/UseFavourites";
 import { Helmet } from "react-helmet-async";
+import useAdmin from "../../../Hooks/UseAdmin";
 
 
 const BiodataDetails = () => {
@@ -19,7 +20,8 @@ const BiodataDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     const [allBiodata, loading] = UseBiodata();
-    const [isPremium] = usePremium();
+    const [isPremium, isPremiumLoading] = usePremium();
+    const [isAdmin, isAdminLoading] = useAdmin();
     const [favoritesStatus, setFavoritesStatus] = useState({});
     const [userFavorites, favoritesLoading, refetchFavorites] = UseFavourites();
     const navigate = useNavigate();
@@ -81,7 +83,7 @@ const BiodataDetails = () => {
         navigate(`/checkout/${biodata.biodataId}`);
     };
 
-    if (loading || favoritesLoading) {
+    if (loading || favoritesLoading || isPremiumLoading || isAdminLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
@@ -136,7 +138,7 @@ const BiodataDetails = () => {
 
                     </div>
                     <div className="border-2 p-1 rounded">
-                        {isPremium ?
+                        {isPremium || isAdmin?
                             <div>
                                 <p><strong>Mail: </strong> {biodata.contactEmail}</p>
                                 <p className="text-gray-500"><strong>Mobile: </strong> {biodata.mobileNumber}</p>
@@ -161,7 +163,7 @@ const BiodataDetails = () => {
                     <IoIosAddCircleOutline className="text-xl" />
                 </div>
 
-                <div className={`flex items-center gap-2 px-4 py-2 rounded-full ${isPremium
+                <div className={`flex items-center gap-2 px-4 py-2 rounded-full ${isPremium || isAdmin
                     ? "bg-gray-400 text-gray-800 cursor-not-allowed"
                     : "bg-pink-500 text-white hover:bg-pink-700"
                     }`}>

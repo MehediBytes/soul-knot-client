@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import UseBiodata from "../../../Hooks/UseBiodata";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import usePremium from "../../../Hooks/UsePremium";
 
 
 const ViewBiodata = () => {
@@ -9,17 +12,67 @@ const ViewBiodata = () => {
     const { user } = useAuth();
     const [allBiodata, loading] = UseBiodata();
     const [biodata, setBiodata] = useState(null);
+    const axiosSecure = useAxiosSecure();
+    const [isPremium, isPremiumLoading, premiumRefetch] = usePremium();
+    const [requestSent, setRequestSent] = useState(false);
+    const [isApproved, setIsApproved] = useState(false);
 
     useEffect(() => {
         if (allBiodata) {
-            const userBiodata = allBiodata.find(item => item.contactEmail === user.email);
+            const userBiodata = allBiodata.find(item => item.contactEmail === user?.email);
             if (userBiodata) {
                 setBiodata(userBiodata);
             }
         }
     }, [allBiodata, user?.email]);
 
-    if (loading) {
+    const handleRequestPremium = async () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This action cannot be undone!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const payload = {
+                        biodataId: biodata?.biodataId,
+                        memberType: biodata?.memberType,
+                        userEmail: user?.email,
+                        userName: user?.displayName,
+                    };
+                    // Sending request to the backend to request premium
+                    const response = await axiosSecure.post('/premium/request', payload);
+                    if (response.data) {
+                        Swal.fire("Success", "Your premium request has been sent. Awaiting approval from admin.", "success");
+                        setRequestSent(true);
+                    } else {
+                        Swal.fire("Error", "Something went wrong, please try again.", "error");
+                    }
+                } catch (error) {
+                    console.log(error);
+                    Swal.fire("Error", "An error occurred. Please try again later.", "error", error.message);
+                }
+            }
+        });
+    };
+
+    useEffect(() => {
+        if (requestSent) {
+            premiumRefetch();
+        }
+    }, [requestSent, premiumRefetch]);
+
+    useEffect(() => {
+        if (isPremium) {
+            setIsApproved(true);
+        }
+    }, [isPremium]);
+
+    if (loading || isPremiumLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
@@ -28,20 +81,20 @@ const ViewBiodata = () => {
     }
 
     return (
-        <div className="">
+        <div className="max-w-7xl mx-auto px-4">
             <Helmet>
                 <title>{user?.displayName}-Biodata | Soul-Knot</title>
             </Helmet>
             <div>
                 {!biodata ?
-                    <div className="">
+                    <div className="text-center">
                         <h2 className="text-3xl font-bold mb-6 text-pink-500 text-center">
                             No Biodata Found
                         </h2>
                     </div> :
                     <div className="flex flex-col justify-center items-center gap-5">
                         <div>
-                            <img className="w-32 h-32 rounded-full border-2 border-pink-500 mx-auto object-cover" src={biodata.profileImageLink} alt="" />
+                            <img className="w-48 h-48 rounded-full border-2 border-pink-500 mx-auto object-cover" src={biodata.profileImageLink} alt="" />
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <div className="mb-2 md:col-span-2">
@@ -90,10 +143,22 @@ const ViewBiodata = () => {
                         {/* TODO: Make premium button functinality  */}
                         <div>
                             <button
-                                className="w-full bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700 mt-4"
+                                onClick={handleRequestPremium}
+                                disabled={isPremium || requestSent}
+                                className={`w-full px-4 py-2 rounded-full ${isPremium
+                                    ? "text-amber-500 text-2xl font-bold"
+                                    : requestSent
+                                        ? "bg-gray-400 text-gray-800 cursor-not-allowed"
+                                        : "bg-pink-500 text-white hover:bg-pink-700"
+                                    }`}
                             >
-                                Make Biodata To Premium
+                                {isPremium ? "Premium Biodata" : requestSent ? "Premium Request Sent" : "Make Biodata to Premium"}
                             </button>
+                            {isApproved && (
+                                <div className="text-green-500 font-semibold">
+                                    Congratulations You Are A Premium User!
+                                </div>
+                            )}
                         </div>
                     </div>
                 }

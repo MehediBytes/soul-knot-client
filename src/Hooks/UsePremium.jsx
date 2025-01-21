@@ -5,7 +5,7 @@ import useAxiosSecure from "./useAxiosSecure";
 const usePremium = () => {
     const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const { data: isPremium, isPending: isPremiumLoading } = useQuery({
+    const { data: isPremium, isPending: isPremiumLoading, refetch: premiumRefetch } = useQuery({
         queryKey: [user?.email, 'premium'],
         enabled: !loading,
         queryFn: async () => {
@@ -13,7 +13,7 @@ const usePremium = () => {
             return res.data?.premium;
         }
     })
-    return [isPremium, isPremiumLoading]
+    return [isPremium, isPremiumLoading, premiumRefetch]
 };
 
 export default usePremium;
