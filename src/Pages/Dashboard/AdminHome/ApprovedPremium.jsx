@@ -14,18 +14,13 @@ const ApprovedPremium = () => {
             return response?.data;
         },
     });
-    console.log(premiumRequests);
 
     const handleApprove = async (id) => {
-        console.log(id);
-
-        const requestData = premiumRequests.find(request => request._id == id);
+         const requestData = premiumRequests.find(request => request._id == id);
         if (!requestData) {
             console.error('Request not found!');
             return;
         }
-        console.log(requestData);
-
         Swal.fire({
             title: "Are you sure?",
             text: "Do you want to approve this user request?",
@@ -83,7 +78,7 @@ const ApprovedPremium = () => {
                                 <td className="p-4 border border-gray-300 text-center">
                                     <button
                                         onClick={() => handleApprove(request._id)}
-                                        className={`text-white px-4 py-2 rounded-full ${request.memberType === 'premium' ? 'bg-amber-500 cursor-not-allowed' : 'bg-green-500'}`}
+                                        className={`text-white px-4 py-2 rounded-full ${request.memberType === 'premium' ? 'bg-amber-500 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'}`}
                                         disabled={request.memberType === 'premium'}
                                     >
                                         {request.memberType === 'premium' ? 'Premium User' : 'Make Premium'}

@@ -84,7 +84,7 @@ const ApprovedContact = () => {
                                         disabled={data.status === "approved"}
                                         className={`p-2 rounded-full ${data.status === "approved"
                                                 ? "bg-gray-400 text-white cursor-not-allowed"
-                                                : "bg-blue-500 text-white hover:bg-blue-600"
+                                                : "bg-blue-500 text-white hover:bg-blue-700"
                                             }`}
                                     >
                                         {data.status === "approved"

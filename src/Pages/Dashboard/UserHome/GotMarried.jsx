@@ -205,7 +205,7 @@ const GotMarried = () => {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600 flex justify-center items-center"
+                    className="w-full bg-pink-500 text-white py-2 rounded-md hover:bg-pink-700 flex justify-center items-center"
                     disabled={uploading}
                 >
                     {uploading ? "Uploading..." : "Submit"}

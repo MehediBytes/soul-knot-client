@@ -29,12 +29,12 @@ const ViewBiodata = () => {
     const handleRequestPremium = async () => {
         Swal.fire({
             title: "Are you sure?",
-            text: "This action cannot be undone!",
+            text: "Make request for premium!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Yes, Make A Request!",
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {

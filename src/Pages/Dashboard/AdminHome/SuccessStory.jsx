@@ -56,7 +56,7 @@ const SuccessStory = () => {
                                     <td className="p-4 border border-gray-300 text-center">
                                         <button
                                             onClick={() => handleViewStory(story)}
-                                            className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
+                                            className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-700"
                                         >
                                             <GrView />
                                         </button>
