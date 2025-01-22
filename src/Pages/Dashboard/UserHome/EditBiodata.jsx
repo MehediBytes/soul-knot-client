@@ -149,11 +149,11 @@ const EditBiodata = () => {
                     <option value="">Select</option>
                     <option value={`5'0"`}>5</option>
                     <option value={`5'5"`}>5.5</option>
-                    <option value={`6'0"`}>5.5</option>
-                    <option value={`6'5"`}>5.5</option>
-                    <option value={`7'0"`}>5.5</option>
-                    <option value={`7'5"`}>5.5</option>
-                    <option value={`8'0"`}>5.5</option>
+                    <option value={`6'0"`}>6.0</option>
+                    <option value={`6'5"`}>6.5</option>
+                    <option value={`7'0"`}>7,0</option>
+                    <option value={`7'5"`}>7.5</option>
+                    <option value={`8'0"`}>8.0</option>
                 </select>
                 {errors.height && <span className="text-red-500">Required</span>}
 
@@ -311,11 +311,11 @@ const EditBiodata = () => {
                     <option value="">Select</option>
                     <option value={`5'0"`}>5</option>
                     <option value={`5'5"`}>5.5</option>
-                    <option value={`6'0"`}>5.5</option>
-                    <option value={`6'5"`}>5.5</option>
-                    <option value={`7'0"`}>5.5</option>
-                    <option value={`7'5"`}>5.5</option>
-                    <option value={`8'0"`}>5.5</option>
+                    <option value={`6'0"`}>6.0</option>
+                    <option value={`6'5"`}>6.5</option>
+                    <option value={`7'0"`}>7,0</option>
+                    <option value={`7'5"`}>7.5</option>
+                    <option value={`8'0"`}>8.0</option>
                 </select>
                 {errors.expectedPartnerHeight && <span className="text-red-500">Required</span>}
 
