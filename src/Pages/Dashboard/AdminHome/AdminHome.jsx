@@ -13,7 +13,6 @@ const AdminHome = () => {
     const [payments, paymentsLoading] = UsePayments();
     const [biodata, loading] = UseBiodata()
     const [dashboardData, setDashboardData] = useState({ totalBiodata: 0, maleBiodata: 0, femaleBiodata: 0, premiumBiodata: 0, totalRevenue: 0, });
-    console.log(dashboardData);
 
     useEffect(() => {
         if (!loading && !paymentsLoading && biodata && payments) {

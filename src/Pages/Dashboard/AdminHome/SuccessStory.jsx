@@ -6,7 +6,7 @@ import { GrView } from "react-icons/gr";
 const SuccessStory = () => {
 
     const [stories, storiesLoading] = UseStory();
-    console.log(stories);
+ 
     const [showModal, setShowModal] = useState(false);
     const [selectedStory, setSelectedStory] = useState(null);
 

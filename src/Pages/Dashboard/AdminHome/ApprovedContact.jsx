@@ -10,7 +10,6 @@ const ApprovedContact = () => {
     const [biodata, loading] = UseBiodata();
     const axiosSecure = useAxiosSecure();
     const [combinedData, setCombinedData] = useState([]);
-    console.log(combinedData);
 
     useEffect(() => {
         if (!paymentsLoading && !loading) {

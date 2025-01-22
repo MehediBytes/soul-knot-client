@@ -1,30 +1,26 @@
 import { useEffect, useState } from "react";
 import UseBiodata from "../../../../Hooks/UseBiodata";
 import BiodataCard from "../../../Shared/BiodataCard/BiodataCard";
-import UseUsers from "../../../../Hooks/UseUsers";
 
 const PremiumProfiles = () => {
     const [biodata, loading] = UseBiodata();
-    const [users, usersLoading] = UseUsers();
     const [premiumBiodata, setPremiumBiodata] = useState([]);
     const [sortOrder, setSortOrder] = useState("ascending");
 
     useEffect(() => {
-        if (!usersLoading && !loading && users.length && biodata.length) {
-            const premiumUsers = users.filter(user => user.memberType === "premium");
-            const filteredBiodata = biodata.filter(data =>
-                premiumUsers.some(user => user.email === data.contactEmail)
-            );
+        if (!loading && biodata.length) {
+            // Directly filter biodata based on memberType
+            const filteredBiodata = biodata.filter(data => data.memberType === "premium");
             setPremiumBiodata(filteredBiodata);
         }
-    }, [users, biodata, loading, usersLoading]);
+    }, [biodata, loading]);
 
     // Sort premium profiles based on age
     const sortedPremium = [...premiumBiodata].sort((a, b) =>
         sortOrder === "ascending" ? a.age - b.age : b.age - a.age
     );
 
-    if (loading || usersLoading) {
+    if (loading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>

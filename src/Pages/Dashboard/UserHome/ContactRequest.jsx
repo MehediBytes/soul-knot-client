@@ -16,7 +16,6 @@ const ContactRequest = () => {
         queryKey: ["contactRequests", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get("/my-contact-requests");
-            console.log(res.data);
             return res.data;
         },
     });
@@ -24,10 +23,8 @@ const ContactRequest = () => {
     // Combine Contact Requests with Biodata
     const combinedData = requests.map((req) => {
         const biodataDetails = biodata.find((b) => b.biodataId == req.biodataId);
-        console.log(biodataDetails);
         return { ...req, ...biodataDetails };
     });
-    console.log(combinedData);
 
     // Handle Delete Request
     const handleDelete = async (id) => {

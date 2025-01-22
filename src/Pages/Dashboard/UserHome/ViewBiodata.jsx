@@ -53,7 +53,6 @@ const ViewBiodata = () => {
                         Swal.fire("Error", "Something went wrong, please try again.", "error");
                     }
                 } catch (error) {
-                    console.log(error);
                     Swal.fire("Error", "An error occurred. Please try again later.", "error", error.message);
                 }
             }

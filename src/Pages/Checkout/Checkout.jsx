@@ -64,7 +64,7 @@ const Checkout = () => {
             return;
         }
         else{
-            console.log(paymentMethod);
+            console.error(paymentMethod);
             setError('');
         }
 

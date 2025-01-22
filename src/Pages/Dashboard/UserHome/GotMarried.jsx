@@ -33,7 +33,6 @@ const GotMarried = () => {
     useEffect(() => {
         if (stories) {
             const userOwnStory = stories.find(item => item?.selfBiodataId == userBio?.biodataId);
-            console.log(userOwnStory);
             if (userOwnStory) {
                 setUserStory(userOwnStory);
                 reset(userOwnStory)
@@ -128,9 +127,6 @@ const GotMarried = () => {
                         {...register("partnerBiodataId", {
                             required: "Partner Biodata ID is required",
                             validate: (value) => {
-                                if (userBio?.biodataId) {
-                                    return "This is your Biodata Id"
-                                }
                                 if (value < 1) {
                                     return "biodata ID must be at least 1";
                                 }
