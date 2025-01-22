@@ -39,7 +39,7 @@ const BiodataDetails = () => {
     ).slice(0, 3);
 
     useEffect(() => {
-        if (userFavorites) {
+        if (userFavorites && user?.email) {
             const favoritesMap = {};
             userFavorites.forEach(item => {
                 favoritesMap[item.biodataId] = item.userFavorite === user?.email;
@@ -138,7 +138,7 @@ const BiodataDetails = () => {
 
                     </div>
                     <div className="border-2 p-1 rounded">
-                        {isPremium || isAdmin?
+                        {isPremium || isAdmin ?
                             <div>
                                 <p><strong>Mail: </strong> {biodata.contactEmail}</p>
                                 <p className="text-gray-500"><strong>Mobile: </strong> {biodata.mobileNumber}</p>
@@ -168,7 +168,7 @@ const BiodataDetails = () => {
                     : "bg-pink-500 text-white hover:bg-pink-700"
                     }`}>
                     <button onClick={handleRequestContactInfo}
-                        disabled={isPremium}>Request Contact Information</button>
+                        disabled={isPremium || isAdmin}>Request Contact Information</button>
                     <FaRegHandshake className="text-xl" />
                 </div>
             </div>

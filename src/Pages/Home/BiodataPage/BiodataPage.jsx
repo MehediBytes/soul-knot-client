@@ -20,7 +20,6 @@ const BiodataPage = () => {
                 if (bio.contactEmail === user?.email) {
                     return false;
                 }
-
                 const ageInRange = (age) => {
                     switch (ageRange) {
                         case "18-30":
@@ -33,7 +32,6 @@ const BiodataPage = () => {
                             return true;
                     }
                 };
-
                 const isAgeInRange = ageInRange(bio.age);
                 const isGenderMatching =
                     genderFilter === "" || bio.biodataType === genderFilter;

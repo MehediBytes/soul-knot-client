@@ -5,9 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const Login = () => {
-    const { signIn } = useAuth();
+    const { signIn, showPassword, setShowPassword } = useAuth();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
@@ -55,12 +56,17 @@ const Login = () => {
                     </div>
                     <div className="mb-4">
                         <label className="block mb-1">Password</label>
-                        <input
-                            type="password"
-                            {...register("password", { required: "Password is required" })}
-                            className="w-full px-4 py-2 border rounded-md"
-                        />
-                        {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                {...register("password", { required: "Password is required" })}
+                                className="w-full px-4 py-2 border rounded-md"
+                            />
+                            <button type="button" className="absolute right-5 top-3" onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                        </div>
                     </div>
                     <button
                         type="submit"

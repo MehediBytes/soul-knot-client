@@ -16,7 +16,7 @@ const BiodataCard = ({ profile }) => {
                 className="w-32 h-32 rounded-full border-2 border-pink-500 mx-auto mt-2 object-cover"
             />
             <div className="p-4 text-center">
-                <div className="text-center border-2 border-pink-500 rounded">
+                <div className="text-center border-2 border-pink-500 rounded-lg">
                     <h2 className="text-xl font-bold">{profile?.name}</h2>
                     <h4 className="font-medium">Biodata ID: {profile?.biodataId}</h4>
                     <p className="flex items-center justify-center gap-2 text-gray-500"><strong><MdWorkOutline className="text-xl" /></strong> {profile?.occupation}</p>

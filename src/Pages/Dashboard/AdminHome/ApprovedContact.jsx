@@ -6,14 +6,12 @@ import UsePayments from "../../../Hooks/UsePayments";
 import Swal from "sweetalert2";
 
 const ApprovedContact = () => {
-
     const [payments, paymentsLoading, refetchPayments] = UsePayments();
     const [biodata, loading] = UseBiodata();
     const axiosSecure = useAxiosSecure();
     const [combinedData, setCombinedData] = useState([]);
     console.log(combinedData);
 
-    // Combine payments and biodata based on biodataId
     useEffect(() => {
         if (!paymentsLoading && !loading) {
             const mergedData = payments.map((payment) => {
@@ -83,7 +81,7 @@ const ApprovedContact = () => {
                                         onClick={() => handleApprove(data._id)}
                                         disabled={data.status === "approved"}
                                         className={`p-2 rounded-full ${data.status === "approved"
-                                                ? "bg-gray-400 text-white cursor-not-allowed"
+                                                ? "bg-green-500 text-white cursor-not-allowed"
                                                 : "bg-blue-500 text-white hover:bg-blue-700"
                                             }`}
                                     >

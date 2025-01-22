@@ -9,7 +9,7 @@ const usePremium = () => {
         queryKey: [user?.email, 'premium'],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/admin/${user.email}`);
+            const res = await axiosSecure.get(`/users/admin/${user?.email}`);
             return res.data?.premium;
         }
     })

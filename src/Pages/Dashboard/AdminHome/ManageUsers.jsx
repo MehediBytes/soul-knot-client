@@ -7,23 +7,53 @@ import Swal from "sweetalert2";
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
     const [searchQuery, setSearchQuery] = useState("");
+    const [localUsers, setLocalUsers] = useState([]);
 
     const { data: allUsers = [], isLoading, refetch: usersRefetch } = useQuery({
         queryKey: ['users', searchQuery],
         queryFn: async () => {
             const response = await axiosSecure.get(`/users?search=${searchQuery}`);
+            setLocalUsers(response.data);
             return response?.data;
         },
     });
 
     const handleMakePremium = async (id) => {
-        const user = allUsers.find((user) => user._id === id);
+        const user = localUsers.find((user) => user._id === id);
         if (!user) {
             console.error('User not found!');
             return;
         }
-        
-    }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to make this user a premium member?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, make premium!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axiosSecure.put(`/approve-premium/${id}`, {
+                        userEmail: user?.email
+                    });
+                    if (response?.data?.success) {
+                        const updatedUsers = localUsers.map((u) =>
+                            u._id === id ? { ...u, memberType: "premium" } : u
+                        );
+                        setLocalUsers(updatedUsers);
+                        Swal.fire("Approved!", response.data.message, "success");
+                    }
+                    usersRefetch();
+                } catch (error) {
+                    console.error('Error Response:', error.response);
+                    Swal.fire("Error!", error.response?.data?.message || "Failed to make the user premium.", "error");
+                }
+            }
+        });
+    };
     const handleMakeAdmin = async (id) => {
         const user = allUsers.find((user) => user._id === id);
         if (!user) {
@@ -86,26 +116,26 @@ const ManageUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {allUsers.map((user) => (
+                        {localUsers.map((user) => (
                             <tr key={user._id}>
                                 <td className="p-4 border border-gray-300 text-center">{user.name}</td>
                                 <td className="p-4 border border-gray-300 text-center">{user.email}</td>
                                 <td className="p-4 border border-gray-300 text-center">
                                     <button
                                         onClick={() => handleMakePremium(user._id)}
-                                        className={`text-white px-4 py-2 rounded-full ${user.memberType === 'premium' ? 'bg-amber-500 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'}`}
-                                        disabled={user.memberType === 'premium'}
+                                        className={`text-white px-4 py-2 rounded-full ${user?.memberType === 'premium' ? 'bg-amber-500 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'}`}
+                                        disabled={user?.memberType === 'premium'}
                                     >
-                                        {user.memberType === 'premium' ? 'Premium' : 'Make Premium'}
+                                        {user?.memberType === 'premium' ? 'Premium' : 'Make Premium'}
                                     </button>
                                 </td>
                                 <td className="p-4 border border-gray-300 text-center space-x-2">
                                     <button
                                         onClick={() => handleMakeAdmin(user._id)}
-                                        className={`text-white px-4 py-2 rounded-full ${user.role === 'admin' ? 'bg-indigo-900 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
-                                        disabled={user.role === 'admin'}
+                                        className={`text-white px-4 py-2 rounded-full ${user?.role === 'admin' ? 'bg-indigo-900 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
+                                        disabled={user?.role === 'admin'}
                                     >
-                                        {user.role === 'admin' ? 'Admin' : 'Make Admin'}
+                                        {user?.role === 'admin' ? 'Admin' : 'Make Admin'}
                                     </button>
                                 </td>
                             </tr>
