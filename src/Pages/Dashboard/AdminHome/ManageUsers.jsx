@@ -3,23 +3,24 @@ import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import UseBiodata from "../../../Hooks/UseBiodata";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
     const [searchQuery, setSearchQuery] = useState("");
-    const [localUsers, setLocalUsers] = useState([]);
+    const [biodata] = UseBiodata();
 
     const { data: allUsers = [], isLoading, refetch: usersRefetch } = useQuery({
         queryKey: ['users', searchQuery],
         queryFn: async () => {
             const response = await axiosSecure.get(`/users?search=${searchQuery}`);
-            setLocalUsers(response.data);
             return response?.data;
-        },
+        }
     });
 
     const handleMakePremium = async (id) => {
-        const user = localUsers.find((user) => user._id === id);
+        const user = allUsers.find((user) => user._id === id);
+        const userBiodata = biodata.find((bio) => bio.contactEmail === user.email);
         if (!user) {
             console.error('User not found!');
             return;
@@ -36,14 +37,11 @@ const ManageUsers = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const response = await axiosSecure.put(`/approve-premium/${id}`, {
-                        userEmail: user?.email
+                    const response = await axiosSecure.put(`/admin/approve-premium/${id}`, {
+                        userEmail: user?.email,
+                        biodataId: userBiodata?.biodataId
                     });
                     if (response?.data?.success) {
-                        const updatedUsers = localUsers.map((u) =>
-                            u._id === id ? { ...u, memberType: "premium" } : u
-                        );
-                        setLocalUsers(updatedUsers);
                         Swal.fire("Approved!", response.data.message, "success");
                     }
                     usersRefetch();
@@ -82,6 +80,9 @@ const ManageUsers = () => {
             }
         });
     }
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
     if (isLoading) {
         return (
@@ -102,7 +103,7 @@ const ManageUsers = () => {
                     className="px-4 py-2 border rounded-md"
                     placeholder="Search User By Name"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={handleSearchChange}
                 />
             </div>
             <div className="overflow-x-auto mt-5">
@@ -116,7 +117,7 @@ const ManageUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {localUsers.map((user) => (
+                        {allUsers.map((user) => (
                             <tr key={user._id}>
                                 <td className="p-4 border border-gray-300 text-center">{user.name}</td>
                                 <td className="p-4 border border-gray-300 text-center">{user.email}</td>
