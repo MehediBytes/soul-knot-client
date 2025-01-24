@@ -4,7 +4,7 @@ import UseBiodata from "../../../Hooks/UseBiodata";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import usePremium from "../../../Hooks/UsePremium";
+import UsePremium from "../../../Hooks/UsePremium";
 
 
 const ViewBiodata = () => {
@@ -13,7 +13,7 @@ const ViewBiodata = () => {
     const [allBiodata, loading] = UseBiodata();
     const [biodata, setBiodata] = useState(null);
     const axiosSecure = useAxiosSecure();
-    const [isPremium, isPremiumLoading, premiumRefetch] = usePremium();
+    const [isPremium, isPremiumLoading] = UsePremium();
     const [requestSent, setRequestSent] = useState(false);
     const [isApproved, setIsApproved] = useState(false);
 
@@ -25,6 +25,31 @@ const ViewBiodata = () => {
             }
         }
     }, [allBiodata, user?.email]);
+
+    useEffect(() => {
+        const fetchPremiumData = async () => {
+            try {
+                const response = await axiosSecure.get("/premium/request");
+                const premiumRequests = response.data;
+                const userRequest = premiumRequests.find(request => request.userEmail === user?.email);
+                if (userRequest) {
+                    setRequestSent(true);
+                }
+            } catch (error) {
+                console.error("Error fetching premium collection data:", error);
+            }
+        };
+
+        if (user?.email) {
+            fetchPremiumData();
+        }
+    }, [user?.email, axiosSecure]);
+
+    useEffect(() => {
+        if (isPremium) {
+            setIsApproved(true);
+        }
+    }, [isPremium]);
 
     const handleRequestPremium = async () => {
         Swal.fire({
@@ -47,8 +72,8 @@ const ViewBiodata = () => {
                     // Sending request to the backend to request premium
                     const response = await axiosSecure.post('/premium/request', payload);
                     if (response.data) {
-                        Swal.fire("Success", "Your premium request has been sent. Awaiting approval from admin.", "success");
                         setRequestSent(true);
+                        Swal.fire("Success", "Your premium request has been sent. Awaiting approval from admin.", "success");
                     } else {
                         Swal.fire("Error", "Something went wrong, please try again.", "error");
                     }
@@ -58,18 +83,6 @@ const ViewBiodata = () => {
             }
         });
     };
-
-    useEffect(() => {
-        if (requestSent) {
-            premiumRefetch();
-        }
-    }, [requestSent, premiumRefetch]);
-
-    useEffect(() => {
-        if (isPremium) {
-            setIsApproved(true);
-        }
-    }, [isPremium]);
 
     if (loading || isPremiumLoading) {
         return (

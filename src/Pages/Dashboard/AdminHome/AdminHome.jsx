@@ -15,7 +15,7 @@ const AdminHome = () => {
     const [dashboardData, setDashboardData] = useState({ totalBiodata: 0, maleBiodata: 0, femaleBiodata: 0, premiumBiodata: 0, totalRevenue: 0, });
 
     useEffect(() => {
-        if (!loading && !paymentsLoading && biodata && payments) {
+        if (biodata && payments) {
             const totalBiodata = biodata.length;
             const maleBiodata = biodata.filter(story => story.biodataType === "Male").length;
             const femaleBiodata = biodata.filter(story => story.biodataType === "Female").length;
@@ -24,15 +24,7 @@ const AdminHome = () => {
 
             setDashboardData({ totalBiodata, maleBiodata, femaleBiodata, premiumBiodata, totalRevenue, });
         }
-    }, [biodata, loading, payments, paymentsLoading]);
-
-    if (loading || paymentsLoading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
-            </div>
-        );
-    }
+    }, [biodata, payments]);
 
     // Pie chart data
     const pieData = {
@@ -51,6 +43,14 @@ const AdminHome = () => {
             },
         ],
     };
+
+    if (loading || paymentsLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-7xl mx-auto">

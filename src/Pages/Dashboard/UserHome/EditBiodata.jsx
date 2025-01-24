@@ -288,11 +288,11 @@ const EditBiodata = () => {
                 <input
                     type="number"
                     min="18"
-                    {...register("age", {
+                    {...register("expectedPartnerAge", {
                         required: true,
                         validate: (value) => {
                             if (value < 18) {
-                                return "Age must be at least 18";
+                                return "Expected Partner Age must be at least 18";
                             }
                             return true;
                         },

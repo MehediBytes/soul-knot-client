@@ -5,13 +5,13 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaRegHandshake } from "react-icons/fa6";
 import BiodataCard from "../../Shared/BiodataCard/BiodataCard";
 import UseBiodata from "../../../Hooks/UseBiodata";
-import usePremium from "../../../Hooks/UsePremium";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import UseFavourites from "../../../Hooks/UseFavourites";
 import { Helmet } from "react-helmet-async";
 import useAdmin from "../../../Hooks/UseAdmin";
+import UsePremium from "../../../Hooks/UsePremium";
 
 
 const BiodataDetails = () => {
@@ -20,7 +20,7 @@ const BiodataDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     const [allBiodata, loading] = UseBiodata();
-    const [isPremium, isPremiumLoading] = usePremium();
+    const [isPremium, isPremiumLoading] = UsePremium();
     const [isAdmin, isAdminLoading] = useAdmin();
     const [favoritesStatus, setFavoritesStatus] = useState({});
     const [userFavorites, favoritesLoading, refetchFavorites] = UseFavourites();

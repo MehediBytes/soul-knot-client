@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
-const usePremium = () => {
+const UsePremium = () => {
     const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
     const { data: isPremium, isPending: isPremiumLoading, refetch: premiumRefetch } = useQuery({
@@ -16,4 +16,4 @@ const usePremium = () => {
     return [isPremium, isPremiumLoading, premiumRefetch]
 };
 
-export default usePremium;
+export default UsePremium;

@@ -41,10 +41,11 @@ const GotMarried = () => {
     }, [stories, userBio?.biodataId, reset]);
 
     const onSubmit = async (data) => {
-        if (!data.partnerBiodataId || !data.review || !data.coupleImage[0]) {
+        if (!data.partnerBiodataId || !data.review || !data.coupleImage[0] || !data.marriageDate) {
             Swal.fire("Error", "Please fill in all required fields.", "error");
             return;
         }
+        console.log(data);
 
         // Image upload to imgbb
         const imageFile = data.coupleImage[0];
@@ -68,6 +69,7 @@ const GotMarried = () => {
                     coupleImage: imgResult.data.display_url,
                     reviewStar: data.reviewStar,
                     review: data.review,
+                    marriageDate: data.marriageDate,
                 };
 
                 // Submit the story to the backend
