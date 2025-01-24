@@ -8,6 +8,7 @@ import useAxiosPublic from "../../Hooks/UseAxiosPublic";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { useState } from "react";
 
 const SignUp = () => {
     const axiosPublic = useAxiosPublic();
@@ -16,11 +17,13 @@ const SignUp = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
     const onSubmit = async (data) => {
+        setIsSubmitting(true);
         try {
             // Prepare FormData for image upload
             const formData = new FormData();
@@ -73,6 +76,8 @@ const SignUp = () => {
             }
         } catch (error) {
             Swal.fire("Error", "Something went wrong. Please try again.", "error", error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -139,9 +144,11 @@ const SignUp = () => {
                     </div>
                     <button
                         type="submit"
-                        className="bg-pink-500 font-semibold text-white py-2 px-10 w-full rounded-md hover:bg-pink-700"
+                        disabled={isSubmitting} // Disable button during submission
+                        className={`font-semibold text-white py-2 px-10 w-full rounded-md ${isSubmitting ? "bg-gray-500 cursor-not-allowed" : "bg-pink-500 hover:bg-pink-700"
+                            }`}
                     >
-                        Sign Up
+                        {isSubmitting ? "Signing up..." : "Sign Up"}
                     </button>
                     <p className="text-center my-5 font-semibold">OR</p>
                     <SocialLogin></SocialLogin>

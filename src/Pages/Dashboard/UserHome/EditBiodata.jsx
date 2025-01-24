@@ -208,7 +208,7 @@ const EditBiodata = () => {
                     <option value="Freelancer">Freelancer</option>
                     <option value="Doctor">Doctor</option>
                     <option value="Engineer">Engineer</option>
-                    <option value="Layer">Layer</option>
+                    <option value="Lawyer">Lawyer</option>
                     <option value="Entertainer">Entertainer</option>
                 </select>
                 {errors.occupation && <span className="text-red-500">Required</span>}

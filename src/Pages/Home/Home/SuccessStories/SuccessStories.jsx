@@ -14,7 +14,7 @@ const SuccessStories = () => {
         );
     }
 
-    // Sort stories by marriageDate in descending order
+    // Sort stories by marriageDate in accecending to descending order
     const sortedStories = [...stories].sort((a, b) => new Date(b.marriageDate) - new Date(a.marriageDate));
 
     return (
@@ -24,7 +24,7 @@ const SuccessStories = () => {
                 <p className="text-gray-600 mb-5">
                     Read the heartwarming stories of couples who found their soulmate on Soul-Knot.
                 </p>
-                <div className="flex gap-6 overflow-x-scroll scrollbar-thin scrollbar-thumb-pink-500">
+                <div className="flex gap-6 overflow-x-scroll pb-5">
                     {sortedStories.map((story) => (
                         <div
                             key={story._id}
