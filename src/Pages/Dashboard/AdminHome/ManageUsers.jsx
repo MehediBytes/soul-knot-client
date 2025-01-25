@@ -1,21 +1,30 @@
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import UseBiodata from "../../../Hooks/UseBiodata";
+import { debounce } from "lodash";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
     const [searchQuery, setSearchQuery] = useState("");
     const [biodata] = UseBiodata();
+    const [debouncedQuery, setDebouncedQuery] = useState("");
 
-    const { data: allUsers = [], isLoading, refetch: usersRefetch } = useQuery({
-        queryKey: ['users', searchQuery],
+    useEffect(() => {
+        const handler = debounce(() => setDebouncedQuery(searchQuery));
+        handler();
+        return () => handler.cancel();
+    }, [searchQuery]);
+
+    const { data: allUsers = [], refetch: usersRefetch } = useQuery({
+        queryKey: ['users', debouncedQuery],
         queryFn: async () => {
-            const response = await axiosSecure.get(`/users?search=${searchQuery}`);
+            const response = await axiosSecure.get(`/users?search=${debouncedQuery}`);
             return response?.data;
-        }
+        },
+        enabled: !!debouncedQuery || searchQuery === "",
     });
 
     const handleMakePremium = async (id) => {
@@ -84,13 +93,6 @@ const ManageUsers = () => {
         setSearchQuery(e.target.value);
     };
 
-    if (isLoading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full border-pink-500 border-t-transparent"></div>
-            </div>
-        );
-    }
     return (
         <div className="max-w-7xl mx-auto">
             <Helmet>
