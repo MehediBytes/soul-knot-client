@@ -73,6 +73,13 @@ Welcome to the Matrimony Platform Soul-Knot! This online platform connects users
 
 ---
 
+### 🖼️ Project Screenshot  
+
+![Soul-Knot Screenshot 1](https://i.ibb.co.com/q8WPP2T/soul-knot-1.png) 
+![Soul-Knot Screenshot 2](https://i.ibb.co.com/YTt5r6bz/soul-knot-2.png)
+
+---
+
 ## Environment Variables
 Ensure the following environment variables are set:
 
