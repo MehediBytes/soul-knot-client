@@ -55,7 +55,7 @@ Welcome to the Matrimony Platform Soul-Knot! This online platform connects users
 - **Manage Users**: Approve, block, or delete user accounts.
 - **Approve Premium**: Approve user requests for premium status.
 - **Approve Contact Requests**: Manage and approve contact information requests.
-- **Admin Credentials**: Email-hasan@khan.com, Pass-1234Mm
+- **Admin Credentials**: Email- hasan@khan.com, Pass- 1234Mm
 
 ### Notifications
 - Sweet alerts/toasts for all user actions and CRUD operations.
