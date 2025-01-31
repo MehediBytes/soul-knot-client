@@ -1,4 +1,4 @@
-# Soul-Knot
+# Soul-Knot (A Matrimony Platform)
 
 Welcome to the Matrimony Platform Soul-Knot! This online platform connects users with potential life partners through an intuitive, user-friendly interface. Built using the MERN stack (MongoDB, Express, React, and Node.js), this platform offers numerous features for creating, managing, and interacting with biodata.
 
