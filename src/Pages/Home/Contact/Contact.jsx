@@ -59,7 +59,7 @@ const Contact = () => {
 
 
     return (
-        <div className="max-w-7xl mx-auto px-4 pb-5">
+        <div className="container mx-auto px-4 pb-5">
             <Helmet>
                 <title>Contact-Us | Soul-Knot</title>
             </Helmet>

@@ -113,7 +113,7 @@ const Checkout = () => {
     };
 
     return (
-        <div className="max-w-7xl px-5 mb-5">
+        <div className="container px-5 mb-5">
             <form onSubmit={handleSubmit} className="border rounded-xl shadow p-5">
                 <h2 className="text-3xl font-bold mb-5 text-center text-pink-500">Payment For Contact Information</h2>
                 <div className="mb-4">

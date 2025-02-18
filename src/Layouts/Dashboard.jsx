@@ -6,7 +6,7 @@ import useAuth from '../Hooks/useAuth';
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     const location = useLocation();
-    const { logOut } = useAuth();
+    const { user, logOut } = useAuth();
 
     // Handle Logout
     const handleLogout = () => {
@@ -82,7 +82,8 @@ const Dashboard = () => {
                             </div>
 
                         </>
-                            : <>
+                            :
+                            <>
                                 <div>
                                     <Link to={"/dashboard/userHome"}
                                         className={`p-1 ${location.pathname === '/dashboard/userHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
@@ -148,8 +149,24 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* dashboard content */}
-            <div className="p-5 w-full">
-                <Outlet></Outlet>
+            <div className="w-full">
+                <nav className='flex flex-row justify-between mb-5 border-b border-pink-500 p-2'>
+                    <h3 className="text-3xl font-black text-pink-500"><Link to={"/"}>Soul-Knot</Link></h3>
+                    <div className='flex items-center gap-2'>
+                        <div className='border rounded-full'>
+                            <img className="w-10 h-10 rounded-full border-2 border-pink-500 cursor-pointer"
+                                referrerPolicy="no-referrer"
+                                src={user?.photoURL || "None"}
+                                alt={user?.displayName || "User"}
+                                title={user?.displayName || "User"} />
+                        </div>
+                        <button onClick={handleLogout}
+                            className='border rounded-lg px-2 py-1 text-white bg-pink-500 hover:bg-pink-700'>Log out</button>
+                    </div>
+                </nav>
+                <section className='px-2'>
+                    <Outlet></Outlet>
+                </section>
             </div>
         </div>
     );

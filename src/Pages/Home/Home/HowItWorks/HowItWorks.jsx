@@ -29,7 +29,7 @@ const HowItWorks = () => {
     ];
 
     return (
-        <section className="max-w-7xl mx-auto my-5">
+        <section className="container mx-auto my-5">
             <div className="text-center px-4">
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">How It Works</h2>
                 <p className="text-gray-600 mb-5">

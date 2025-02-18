@@ -103,7 +103,7 @@ const GotMarried = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
             <Helmet>
                 <title>Married | Soul-Knot</title>
             </Helmet>

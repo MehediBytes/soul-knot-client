@@ -91,7 +91,7 @@ const EditBiodata = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
             <Helmet>
                 <title>{biodata ? "Edit-Biodata | Soul-Knot" : "Create-Biodata | Soul-Knot"}</title>
             </Helmet>

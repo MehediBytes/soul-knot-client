@@ -7,7 +7,7 @@ const About = () => {
             <Helmet>
                 <title>About-Us | Soul-Knot</title>
             </Helmet>
-            <div className="max-w-7xl mx-auto px-4">
+            <div className="container mx-auto px-4">
                 {/* Heading Section */}
                 <motion.h1
                     className="text-3xl font-bold text-pink-500 text-center mb-8"
@@ -20,7 +20,7 @@ const About = () => {
 
                 {/* Intro Section */}
                 <motion.p
-                    className="text-gray-700 text-lg mb-6 text-center"
+                    className="text-gray-700 text-lg mb-6"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}

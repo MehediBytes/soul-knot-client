@@ -20,7 +20,7 @@ const SuccessCounter = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto my-10 px-4">
+        <div className="container mx-auto my-10 px-4">
             <h2 className="text-3xl font-bold text-center mb-5 text-pink-500">Success Counter</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Total Biodata */}

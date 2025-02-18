@@ -4,7 +4,6 @@ const AdminProfile = () => {
     const { user } = useAuth();
     return (
         <div className="text-center">
-            <h2 className="text-2xl font-bold text-pink-500">{user?.displayName}</h2>
             <div className="mt-4">
                 <div className='flex justify-center items-center'>
                     <img className="w-48 h-48 rounded-full border-2 border-pink-500 mx-auto object-cover"

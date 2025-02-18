@@ -54,7 +54,7 @@ const ApprovedPremium = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
             <Helmet>
                 <title>Approved-Premium | Soul-Knot</title>
             </Helmet>

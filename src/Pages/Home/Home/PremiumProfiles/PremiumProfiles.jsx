@@ -29,7 +29,7 @@ const PremiumProfiles = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto my-10 px-4">
+        <div className="container mx-auto my-10 px-4">
             <div className="text-center">
                 <h3 className="text-3xl font-bold text-pink-500">Our Premium Members</h3>
             </div>

@@ -93,7 +93,7 @@ const ViewBiodata = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="container mx-auto px-4">
             <Helmet>
                 <title>{user?.displayName}-Biodata | Soul-Knot</title>
             </Helmet>

@@ -55,7 +55,7 @@ const AdminHome = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
             <Helmet>
                 <title>Admin-Dashboard | Soul-Knot</title>
             </Helmet>

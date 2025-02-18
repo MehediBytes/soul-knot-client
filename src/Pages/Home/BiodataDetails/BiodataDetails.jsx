@@ -19,11 +19,11 @@ const BiodataDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     const [allBiodata, loading] = UseBiodata();
-    const [isPremium, isPremiumLoading] = UsePremium();
     const [isAdmin, isAdminLoading] = useAdmin();
     const [favoritesStatus, setFavoritesStatus] = useState({});
     const [userFavorites, favoritesLoading, refetchFavorites] = UseFavourites();
     const navigate = useNavigate();
+    const [isPremium, isPremiumLoading] = UsePremium();
 
     const { data: biodata = [] } = useQuery({
         queryKey: ['biodata', id],
@@ -109,7 +109,7 @@ const BiodataDetails = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-5">
+        <div className="container mx-auto px-4 py-5">
             <Helmet>
                 <title>Biodata-Details | Soul-Knot</title>
             </Helmet>

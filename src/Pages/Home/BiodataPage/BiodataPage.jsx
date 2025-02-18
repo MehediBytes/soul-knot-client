@@ -70,7 +70,7 @@ const BiodataPage = () => {
     }
 
     return (
-        <div className="md:flex max-w-7xl mb-5 mx-auto px-4">
+        <div className="md:flex container mb-5 mx-auto px-4">
             <Helmet>
                 <title>Biodata | Soul-Knot</title>
             </Helmet>
