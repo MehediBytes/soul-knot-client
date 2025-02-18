@@ -8,7 +8,9 @@ import useAdmin from '../../../Hooks/UseAdmin';
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
+    console.log(user);
     const [isAdmin] = useAdmin();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // State for toggling mobile menu
     const [isOpen, setIsOpen] = useState(false);
@@ -48,14 +50,22 @@ const Navbar = () => {
         <Link to={"/contact"} className={`p-1 ${location.pathname === '/contact' ? 'border-b-2 rounded-lg border-white' : ''}`}>Contact Us</Link>
 
         {
-            user && isAdmin && <Link to={"/dashboard/adminHome"}
-                className={`p-1 ${location.pathname === '/dashboard/adminHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
-            >Dashboard</Link>
+            user && isAdmin &&
+            <div className='flex flex-col lg:flex-row lg:space-x-5'>
+                <Link to={"/dashboard/adminHome"}
+                    className={`p-1 ${location.pathname === '/dashboard/adminHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                >Dashboard</Link>
+                <button onClick={() => setIsModalOpen(true)} className="p-1">Profile</button>
+            </div>
         }
         {
-            user && !isAdmin && <Link to={"/dashboard/userHome"}
-            className={`p-1 ${location.pathname === '/dashboard/userHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
-            >Dashboard</Link>
+            user && !isAdmin &&
+            <div className='flex flex-col lg:flex-row lg:space-x-5'>
+                <Link to={"/dashboard/userHome"}
+                    className={`p-1 ${location.pathname === '/dashboard/userHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                >Dashboard</Link>
+                <button onClick={() => setIsModalOpen(true)} className="p-1">Profile</button>
+            </div>
         }
     </>
 
@@ -83,7 +93,7 @@ const Navbar = () => {
                         <div className='border rounded-full'>
                             <img className="w-8 h-8 rounded-full cursor-pointer"
                                 referrerPolicy="no-referrer"
-                                src={user?.photoURL || user?.photo || "None"}
+                                src={user?.photoURL || "None"}
                                 alt={user?.displayName || "User"}
                                 title={user?.displayName || "User"} />
                         </div>
@@ -103,10 +113,37 @@ const Navbar = () => {
                 className={`lg:hidden ${isOpen ? 'block' : 'hidden'} absolute bg-pink-500 text-white p-4 mt-2 rounded-md`}
                 style={{ top: '50px', left: 0 }}
             >
-                <div className="flex flex-col items-center space-y-4">
+                <div className="flex flex-col items-center">
                     {navOptions}
                 </div>
             </div>
+            {/* Profile Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+                        <h2 className="text-2xl font-bold text-pink-500">{user?.displayName}</h2>
+                        <div className="mt-4">
+                            <div className='flex justify-center items-center'>
+                                <img className="w-28 h-28 rounded-full"
+                                    referrerPolicy="no-referrer"
+                                    src={user?.photoURL || "None"}
+                                    alt={user?.displayName || "User"}
+                                    title={user?.displayName || "User"} />
+                            </div>
+                            <div className='mt-5'>
+                                <p className='text-black'><strong>Name:</strong> {user?.displayName || "N/A"}</p>
+                                <p className='text-black'><strong>Email:</strong> {user?.email}</p>
+                            </div>
+                        </div>
+                        <button
+                            className="mt-4 bg-pink-500 text-white px-4 py-2 rounded"
+                            onClick={() => setIsModalOpen(false)}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </header>
     );
 };
