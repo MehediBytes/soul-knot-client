@@ -94,7 +94,7 @@ const SignUp = () => {
                     onSubmit={handleSubmit(onSubmit)}
                     className="w-full p-6"
                 >
-                    <h2 className="text-3xl font-bold text-center mb-6">Sign Up now!</h2>
+                    <h2 className="text-3xl font-bold text-center mb-6 text-pink-500">Sign Up now!</h2>
                     <div className="mb-4">
                         <label className="block mb-1">Name</label>
                         <input
