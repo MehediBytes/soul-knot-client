@@ -23,6 +23,8 @@ import ApprovedContact from "../Pages/Dashboard/AdminHome/ApprovedContact";
 import SuccessStory from "../Pages/Dashboard/AdminHome/SuccessStory";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Checkout from "../Pages/Checkout/Checkout";
+import AdminProfile from "../Pages/Dashboard/AdminHome/AdminProfile";
+import UserProfile from "../Pages/Dashboard/UserHome/UserProfile";
 
 export const router = createBrowserRouter([
 
@@ -98,6 +100,10 @@ export const router = createBrowserRouter([
                 path: 'gotMarried',
                 element: <GotMarried></GotMarried>
             },
+            {
+                path: 'userProfile',
+                element: <UserProfile></UserProfile>
+            },
 
             // admin only routes
             {
@@ -119,6 +125,10 @@ export const router = createBrowserRouter([
             {
                 path: 'successStory',
                 element: <AdminRoute> <SuccessStory></SuccessStory> </AdminRoute>
+            },
+            {
+                path: 'adminProfile',
+                element: <AdminProfile></AdminProfile>
             },
 
         ]

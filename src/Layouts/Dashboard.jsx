@@ -46,6 +46,13 @@ const Dashboard = () => {
                                 </Link>
                             </div>
                             <div>
+                                <Link to={"/dashboard/adminProfile"}
+                                    className={`p-1 ${location.pathname === '/dashboard/adminProfile' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                                >
+                                    Profile
+                                </Link>
+                            </div>
+                            <div>
                                 <Link to={"/dashboard/manageUsers"}
                                     className={`p-1 ${location.pathname === '/dashboard/manageUsers' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                 >
@@ -81,6 +88,13 @@ const Dashboard = () => {
                                         className={`p-1 ${location.pathname === '/dashboard/userHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                     >
                                         Dashboard
+                                    </Link>
+                                </div>
+                                <div>
+                                    <Link to={"/dashboard/userProfile"}
+                                        className={`p-1 ${location.pathname === '/dashboard/userProfile' ? 'border-b-2 rounded-lg border-white' : ''}`}
+                                    >
+                                        Profile
                                     </Link>
                                 </div>
                                 <div>

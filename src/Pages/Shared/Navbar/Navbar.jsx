@@ -8,7 +8,6 @@ import useAdmin from '../../../Hooks/UseAdmin';
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
-    console.log(user);
     const [isAdmin] = useAdmin();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -124,7 +123,7 @@ const Navbar = () => {
                         <h2 className="text-2xl font-bold text-pink-500">{user?.displayName}</h2>
                         <div className="mt-4">
                             <div className='flex justify-center items-center'>
-                                <img className="w-28 h-28 rounded-full"
+                                <img className="w-28 h-28 rounded-full border-2 border-pink-500 mx-auto object-cover"
                                     referrerPolicy="no-referrer"
                                     src={user?.photoURL || "None"}
                                     alt={user?.displayName || "User"}
