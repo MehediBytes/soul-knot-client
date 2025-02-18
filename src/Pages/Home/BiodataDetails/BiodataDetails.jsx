@@ -15,7 +15,6 @@ import UsePremium from "../../../Hooks/UsePremium";
 
 
 const BiodataDetails = () => {
-
     const { user } = useAuth();
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
@@ -49,6 +48,15 @@ const BiodataDetails = () => {
     }, [userFavorites, user?.email]);
 
     const handleAddToFavorites = async () => {
+        if (!user) {
+            Swal.fire({
+                icon: "warning",
+                title: "Login Required",
+                text: "You need to log in to add to favorites.",
+            });
+            navigate("/login");
+            return;
+        }
         try {
             const response = await axiosSecure.post('/favorites', {
                 biodataId: biodata._id,
@@ -56,7 +64,7 @@ const BiodataDetails = () => {
             });
 
             if (response.data.insertedId) {
-                refetchFavorites()
+                refetchFavorites();
                 Swal.fire({
                     icon: 'success',
                     title: 'Added to Favorites!',
@@ -80,6 +88,15 @@ const BiodataDetails = () => {
     };
 
     const handleRequestContactInfo = () => {
+        if (!user) {
+            Swal.fire({
+                icon: "warning",
+                title: "Login Required",
+                text: "You need to log in to request contact information.",
+            });
+            navigate("/login");
+            return;
+        }
         navigate(`/checkout/${biodata.biodataId}`);
     };
 
@@ -120,22 +137,18 @@ const BiodataDetails = () => {
                     <div className="border-2 p-1 rounded">
                         <p><strong>Age: </strong> {biodata.age}</p>
                         <p className="text-gray-500"><strong>Date Of Birth: </strong> {biodata.dateOfBirth}</p>
-
                     </div>
                     <div className="border-2 p-1 rounded">
                         <p><strong>Height: </strong> {biodata.height}</p>
                         <p className="text-gray-500"><strong>Skin Tone: </strong> {biodata.race}</p>
-
                     </div>
                     <div className="border-2 p-1 rounded">
                         <p><strong>Weight: </strong> {biodata.weight}</p>
                         <p className="text-gray-500"><strong>Expected Partner Age: </strong> {biodata.expectedPartnerAge}</p>
-
                     </div>
                     <div className="border-2 p-1 rounded">
                         <p><strong>Expected Partner Height: </strong> {biodata.expectedPartnerHeight}</p>
                         <p className="text-gray-500"><strong>Expected Partner Weight: </strong> {biodata.expectedPartnerWeight}</p>
-
                     </div>
                     <div className="border-2 p-1 rounded">
                         {isPremium || isAdmin ?
@@ -150,16 +163,19 @@ const BiodataDetails = () => {
                     </div>
                 </div>
             </div>
+
             <div className="flex justify-center items-center gap-10 mt-10">
                 <div className={`flex items-center gap-2 px-4 py-2 rounded-full 
-                    ${favoritesStatus[biodata._id] ? "bg-gray-400 cursor-not-allowed" : "bg-pink-500 text-white hover:bg-pink-700"}`}>
+                ${favoritesStatus[biodata._id] ? "bg-gray-400 cursor-not-allowed" : "bg-pink-500 text-white hover:bg-pink-700"}`}>
+
                     <button
                         onClick={handleAddToFavorites}
                         disabled={favoritesStatus[biodata._id]}
                         className={favoritesStatus[biodata._id] ? "cursor-not-allowed" : ""}
                     >
-                        {favoritesStatus[biodata._id] ? "Added to Favorites" : "Add to Favorites"}
+                        {!user ? "Login to Add Favourite" : favoritesStatus[biodata._id] ? "Added to Favourites" : "Add to Favourites"}
                     </button>
+
                     <IoIosAddCircleOutline className="text-xl" />
                 </div>
 
@@ -168,7 +184,7 @@ const BiodataDetails = () => {
                     : "bg-pink-500 text-white hover:bg-pink-700"
                     }`}>
                     <button onClick={handleRequestContactInfo}
-                        disabled={isPremium || isAdmin}>Request Contact Information</button>
+                        disabled={isPremium || isAdmin}>{!user ? "Login to Request for Contact Information" : "Request Contact Information"}</button>
                     <FaRegHandshake className="text-xl" />
                 </div>
             </div>
