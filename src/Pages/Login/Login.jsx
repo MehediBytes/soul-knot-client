@@ -9,10 +9,23 @@ import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const Login = () => {
     const { signIn, showPassword, setShowPassword } = useAuth();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
+    const autofillCredentials = (role) => {
+        if (role === "user") {
+            setValue("email", "aliraj@hasan.com");
+            setValue("password", "1234Mm");
+        } else if (role === "premium") {
+            setValue("email", "abir@khan.com");
+            setValue("password", "1234Mm");
+        } else if (role === "admin") {
+            setValue("email", "hasan@khan.com");
+            setValue("password", "1234Mm");
+        }
+    };
 
     const onSubmit = (data) => {
         signIn(data.email, data.password)
@@ -55,6 +68,33 @@ const Login = () => {
                         className="w-full"
                     >
                         <h2 className="text-3xl font-bold text-center mb-6 text-pink-500">Login Now!</h2>
+                        {/* Credential buttons */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Demo Credentials:</h3>
+                            <div className="flex justify-between mb-5">
+                                <button
+                                    type="button"
+                                    className="bg-pink-500 px-4 py-2 rounded-md text-white hover:bg-pink-700"
+                                    onClick={() => autofillCredentials("user")}
+                                >
+                                    Standard User
+                                </button>
+                                <button
+                                    type="button"
+                                    className="bg-pink-500 px-4 py-2 rounded-md text-white hover:bg-pink-700"
+                                    onClick={() => autofillCredentials("premium")}
+                                >
+                                    Premium User
+                                </button>
+                                <button
+                                    type="button"
+                                    className="bg-pink-500 px-4 py-2 rounded-md text-white hover:bg-pink-700"
+                                    onClick={() => autofillCredentials("admin")}
+                                >
+                                    Admin
+                                </button>
+                            </div>
+                        </div>
                         <div className="mb-4">
                             <label className="block mb-1">Email</label>
                             <input
