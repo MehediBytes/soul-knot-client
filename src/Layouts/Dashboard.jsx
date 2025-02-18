@@ -6,7 +6,7 @@ import useAuth from '../Hooks/useAuth';
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     const location = useLocation();
-    const { user, logOut } = useAuth();
+    const { logOut } = useAuth();
 
     // Handle Logout
     const handleLogout = () => {
@@ -42,7 +42,7 @@ const Dashboard = () => {
                                 <Link to={"/dashboard/adminHome"}
                                     className={`p-1 ${location.pathname === '/dashboard/adminHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                 >
-                                    {user?.displayName} Dashboard
+                                    Dashboard
                                 </Link>
                             </div>
                             <div>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                                     <Link to={"/dashboard/userHome"}
                                         className={`p-1 ${location.pathname === '/dashboard/userHome' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                     >
-                                        {user?.displayName} Dashboard
+                                        Dashboard
                                     </Link>
                                 </div>
                                 <div>
@@ -94,21 +94,21 @@ const Dashboard = () => {
                                     <Link to={"/dashboard/viewBiodata"}
                                         className={`p-1 ${location.pathname === '/dashboard/viewBiodata' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                     >
-                                        My Biodata
+                                        Biodata
                                     </Link>
                                 </div>
                                 <div>
                                     <Link to={"/dashboard/contactRequest"}
                                         className={`p-1 ${location.pathname === '/dashboard/contactRequest' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                     >
-                                        My Contact Request
+                                        Contact Request
                                     </Link>
                                 </div>
                                 <div>
                                     <Link to={"/dashboard/favouritesBiodata"}
                                         className={`p-1 ${location.pathname === '/dashboard/favouritesBiodata' ? 'border-b-2 rounded-lg border-white' : ''}`}
                                     >
-                                        My Favourites Biodata
+                                        Favourites Biodata
                                     </Link>
                                 </div>
                                 <div>

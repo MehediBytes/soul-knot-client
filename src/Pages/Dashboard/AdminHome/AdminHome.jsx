@@ -4,12 +4,14 @@ import UseBiodata from "../../../Hooks/UseBiodata";
 import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import useAuth from "../../../Hooks/useAuth";
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const AdminHome = () => {
 
+    const { user } = useAuth();
     const [payments, paymentsLoading] = UsePayments();
     const [biodata, loading] = UseBiodata()
     const [dashboardData, setDashboardData] = useState({ totalBiodata: 0, maleBiodata: 0, femaleBiodata: 0, premiumBiodata: 0, totalRevenue: 0, });
@@ -57,6 +59,10 @@ const AdminHome = () => {
             <Helmet>
                 <title>Admin-Dashboard | Soul-Knot</title>
             </Helmet>
+            <h2 className="md:text-4xl text-2xl font-bold text-pink-500 text-center mb-5">
+                <span>Hi, Welcome </span>
+                {user?.displayName}
+            </h2>
             <div className="grid grid-cols-2 gap-4 mb-5">
                 <div className="p-4 bg-[#36A2EB] flex justify-center items-center flex-col gap-3 rounded-full">
                     <h4 className="text-2xl text-white font-bold">Total Biodata</h4>
