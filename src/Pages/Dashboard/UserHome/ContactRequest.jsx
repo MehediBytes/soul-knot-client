@@ -25,6 +25,7 @@ const ContactRequest = () => {
         const biodataDetails = biodata.find((b) => b.biodataId == req.biodataId);
         return { ...req, ...biodataDetails };
     });
+    console.log(combinedData);
 
     // Handle Delete Request
     const handleDelete = async (id) => {
@@ -40,15 +41,15 @@ const ContactRequest = () => {
             if (result.isConfirmed) {
                 try {
                     const res = await axiosSecure.delete(`/delete-payment/${id}`);
-                    if (res.data.deletedCount > 0) {
+                    if (res.data?.deletedCount > 0) {
                         Swal.fire("Deleted!", "The contact request has been deleted.", "success");
-                        refetch(); // Refetch data after deletion
+                        refetch();
                     } else {
                         Swal.fire("Error", "Failed to delete the request.", "error");
                     }
                 } catch (error) {
                     console.error("Error deleting request:", error);
-                    Swal.fire("Error", "Failed to delete the request.", "error");
+                    Swal.fire("Error", "Failed to delete the request.", "error", error.message);
                 }
             }
         });
@@ -101,8 +102,12 @@ const ContactRequest = () => {
                                     </td>
                                     <td className="border border-gray-300 px-4 py-2 text-center">
                                         <button
-                                            onClick={() => handleDelete(req._id)}
-                                            className="bg-white text-red-500 p-2 rounded-full hover:bg-red-200"
+                                            onClick={() => handleDelete(req.paymentId)}
+                                            disabled={req.status === "approved"}
+                                            className={`p-2 rounded-full ${req.status === "approved"
+                                                    ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
+                                                    : "bg-white text-red-500 hover:bg-red-200"
+                                                }`}
                                         >
                                             <FaTrash />
                                         </button>

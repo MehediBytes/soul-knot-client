@@ -47,7 +47,7 @@ const Footer = () => {
                 <hr className="my-8 border-white" />
 
                 <div className="text-center">
-                    <p className="text-black">
+                    <p className="text-white">
                         © {new Date().getFullYear()} Soul-Knot. All Rights Reserved.
                     </p>
                 </div>
