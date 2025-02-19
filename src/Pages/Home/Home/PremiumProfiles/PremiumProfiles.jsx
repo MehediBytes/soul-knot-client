@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import UseBiodata from "../../../../Hooks/UseBiodata";
 import BiodataCard from "../../../Shared/BiodataCard/BiodataCard";
+import { Link } from "react-router-dom";
 
 const PremiumProfiles = () => {
     const [biodata, loading] = UseBiodata();
@@ -50,6 +51,13 @@ const PremiumProfiles = () => {
                 {sortedPremium.slice(0, 8).map((profile) => (
                     <BiodataCard key={profile._id} profile={profile}></BiodataCard>
                 ))}
+            </div>
+            <div className="flex items-center justify-center">
+                <button className="mt-5 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-700">
+                    <Link to={"/biodata"}>
+                        See All Members Biodata
+                    </Link>
+                </button>
             </div>
         </div>
     );

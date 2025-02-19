@@ -6,6 +6,7 @@ import SuccessCounter from "../SuccessCounter/SuccessCounter ";
 import { Helmet } from "react-helmet-async";
 import EventsCommunity from "../EventsCommunity/EventsCommunity ";
 import BlogAdvice from "../BlogAdvice/BlogAdvice ";
+import PersonalityQuiz from "../PersonalityQuiz/PersonalityQuiz";
 
 
 const Home = () => {
@@ -31,6 +32,9 @@ const Home = () => {
             </div>
             <div>
                 <SuccessCounter></SuccessCounter>
+            </div>
+            <div>
+                <PersonalityQuiz></PersonalityQuiz>
             </div>
             <div>
                 <SuccessStories></SuccessStories>
