@@ -164,7 +164,7 @@ const Dashboard = () => {
                             className='border rounded-lg px-2 py-1 text-white bg-pink-500 hover:bg-pink-700'>Log out</button>
                     </div>
                 </nav>
-                <section className='px-2'>
+                <section className='px-2 py-4'>
                     <Outlet></Outlet>
                 </section>
             </div>
