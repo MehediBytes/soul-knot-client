@@ -21,7 +21,8 @@ const SuccessCounter = () => {
 
     return (
         <div className="container mx-auto my-10 px-4">
-            <h2 className="text-3xl font-bold text-center mb-5 text-pink-500">Success Counter</h2>
+            <h2 className="text-3xl font-bold text-center mb-2 text-pink-500">Success Counter</h2>
+            <p className="text-gray-600 mb-5 text-center">Soul-Knot is growing day by day. We improve our service day by day.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Total Biodata */}
                 <div className="bg-green-500 shadow-md rounded-full p-6 text-center">

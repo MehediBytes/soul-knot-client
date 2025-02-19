@@ -26,8 +26,8 @@ const EventsCommunity = () => {
     return (
         <section className="py-5">
             <div className="container mx-auto px-4 text-center">
-                <h2 className="text-3xl font-bold text-pink-500 mb-6">Events & Community</h2>
-                <p className="text-gray-600 mb-10">
+                <h2 className="text-3xl font-bold text-pink-500 mb-2">Events & Community</h2>
+                <p className="text-gray-600 mb-5">
                     Stay connected with our community through exciting events and informative webinars.
                 </p>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">

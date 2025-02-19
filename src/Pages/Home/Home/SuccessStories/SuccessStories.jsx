@@ -18,13 +18,13 @@ const SuccessStories = () => {
     const sortedStories = [...stories].sort((a, b) => new Date(b.marriageDate) - new Date(a.marriageDate));
 
     return (
-        <section className="container mx-auto px-8 my-10">
+        <section className="container mx-auto px-4 my-10">
             <div className="text-center">
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">Success Stories</h2>
                 <p className="text-gray-600 mb-5">
                     Read the heartwarming stories of couples who found their soulmate on Soul-Knot.
                 </p>
-                <div className="flex gap-6 overflow-x-scroll pb-5">
+                <div className="flex gap-4 overflow-x-scroll pb-5">
                     {sortedStories.map((story) => (
                         <div
                             key={story._id}
