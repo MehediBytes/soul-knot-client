@@ -4,6 +4,7 @@ import HowItWorks from "../HowItWorks/HowItWorks";
 import SuccessStories from "../SuccessStories/SuccessStories";
 import SuccessCounter from "../SuccessCounter/SuccessCounter ";
 import { Helmet } from "react-helmet-async";
+import EventsCommunity from "../EventsCommunity/EventsCommunity ";
 
 
 const Home = () => {
@@ -20,6 +21,9 @@ const Home = () => {
             </div>
             <div>
                 <HowItWorks></HowItWorks>
+            </div>
+            <div>
+                <EventsCommunity></EventsCommunity>
             </div>
             <div>
                 <SuccessCounter></SuccessCounter>
